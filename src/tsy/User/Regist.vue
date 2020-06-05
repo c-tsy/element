@@ -2,17 +2,14 @@
   <el-dialog :visible.sync="show">
     <el-form
       :model="Register"
-      ref="form"
+      ref="Register"
       label-width="120px"
       size="small"
       :rules="Rules"
       id="RegisterContainer"
     >
       <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
-      <el-form-item
-        label="头像"
-        prop="Name"
-      >
+      <!-- <el-form-item label="头像">
         <el-upload
           class="avatar-uploader"
           action="https://jsonplaceholder.typicode.com/posts/"
@@ -30,7 +27,7 @@
             class="el-icon-plus avatar-uploader-icon"
           ></i>
         </el-upload>
-      </el-form-item>
+      </el-form-item> -->
 
       <el-row>
         <el-col :span="8">
@@ -108,7 +105,7 @@
         <el-col :span="8">
           <el-form-item
             label="验证码"
-            prop="Code"
+            prop="EmailCode"
           >
             <el-input v-model="Register.EmailCode"></el-input>
           </el-form-item>
@@ -151,7 +148,7 @@
       <el-form-item>
         <el-button
           type="primary"
-          @click="SubmitRegister"
+          @click="SubmitRegister('Register')"
         >注册</el-button>
         <el-button>返回</el-button>
       </el-form-item>
@@ -174,15 +171,15 @@ export default class UserRister extends Vue {
 
   Register: object = {
     Head: "",
-    Name: "",
-    NickName: "",
-    Account: "",
-    Phone: "",
-    PhoneCode: "",
-    Email: "",
-    EmailCode: "",
-    PWD: "",
-    RPWD: ""
+    Name: "张三",
+    NickName: "张三",
+    Account: "15464",
+    Phone: "18148407476",
+    PhoneCode: "1234",
+    Email: "47211@qqq.com",
+    EmailCode: "1234",
+    PWD: "asd1324",
+    RPWD: "asd123456"
   };
 
   handleAvatarSuccess(res: any, file: any) {
@@ -206,87 +203,141 @@ export default class UserRister extends Vue {
     //表单验证规则
     Name: [
       {
+        required: true,
+        message: "姓名不能为空"
+      },
+      {
         validator: (r: any, v: string, cb: Function) => {
           const reg = /^[\u4E00-\u9FA5]{2,4}$/;
           if (!reg.test(v)) {
             cb(new Error("不合法的输入"));
+            return false;
           }
+          cb();
         },
         trigger: "blur"
       }
     ],
     NickName: [
       {
+        required: true,
+        message: "昵称不能为空"
+      },
+      {
         validator: (r: any, v: string, cb: Function) => {
           const reg = /^[\u4E00-\u9FA5]{2,4}$/;
           if (!reg.test(v)) {
             cb(new Error("昵称"));
+            return false;
           }
+          cb();
         },
         trigger: "blur"
       }
     ],
     Account: [
       {
+        required: true,
+        message: "账号不能为空"
+      },
+      {
         validator: (r: any, v: string, cb: Function) => {
           const reg = /^[A-Za-z0-9]{4,15}$/;
+          if (!reg.test(v)) {
+            cb(new Error("账号错误"));
+            return false;
+          }
+          cb();
         },
         trigger: "blur"
       }
     ],
     Phone: [
       {
+        required: true,
+        message: "电话号码不能为空"
+      },
+      {
         validator: (rule: any, val: string, cb: Function) => {
           const reg = /^[+86]{0,}1\d{10}$/;
           if (!reg.test(val)) {
             cb(new Error("手机号码错误"));
+            return false;
           }
+          cb();
         },
         trigger: "blur"
       }
     ],
     PhoneCode: [
       {
+        required: true,
+        message: "短信验证码不能为空"
+      },
+      {
         validator: (r: any, v: string, cb: Function) => {
           if (v == "") {
             cb(new Error());
+            return false;
           }
+          cb();
         },
         trigger: "blur"
       }
     ],
     Email: [
       {
+        required: true,
+        message: "邮箱不能为空"
+      },
+      {
         validator: (r: any, v: string, cb: Function) => {
           const reg = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}/;
           if (!reg.test(v)) {
             cb(new Error("邮箱格式错误"));
+            return false;
           }
+          cb();
         },
         trigger: "blur"
       }
     ],
     EmailCode: [
       {
-        validator: (r: any, v: string, cb: Function) => {},
+        required: true,
+        message: "邮箱验证码不能为空",
         trigger: "blur"
       }
     ],
     PWD: [
+      {
+        required: true,
+        message: "密码不能为空"
+      },
       {
         validator: (r: any, v: string, cb: Function) => {
           const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/;
           if (!reg.test(v)) {
             cb(new Error("密码必须包含字母、数字"));
           }
+          cb();
         },
         trigger: "blur"
       }
     ],
     RPWD: [
       {
+        required: true,
+        message: "重复密码不能为空"
+      },
+      {
         validator: (r: any, v: string, cb: Function) => {
           const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/;
+          if (!reg.test(v)) {
+            cb(new Error("错误"));
+            return false;
+          }
+          cb();
         },
         trigger: "blur"
       }
@@ -302,7 +353,18 @@ export default class UserRister extends Vue {
    *
    * 提交注册
    */
-  SubmitRegister() {}
+  async SubmitRegister(FormName: string) {
+    let refs: any = this.$refs[FormName];
+    // console.log(this.$refs[FormName]);
+    refs.validate(async (valid: any) => {
+      if (valid) {
+        await this.$store.dispatch("REGISTER", this.Register);
+      } else {
+        console.log("error submit!!");
+        return false;
+      }
+    });
+  }
 
   get show() {
     return !!this.value;
