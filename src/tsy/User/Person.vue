@@ -1,5 +1,8 @@
 <template>
-  <el-dialog :visible.sync="show">个人信息</el-dialog>
+  <el-dialog :visible.sync="show">
+    个人信息
+    <slot></slot>
+  </el-dialog>
 </template>
 
 <script lang="ts">

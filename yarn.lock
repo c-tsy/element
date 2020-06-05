@@ -822,7 +822,7 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@ctsy/api-sdk@^2.0.140":
+"@ctsy/api-sdk@^2.0.138", "@ctsy/api-sdk@^2.0.140":
   version "2.0.140"
   resolved "https://registry.yarnpkg.com/@ctsy/api-sdk/-/api-sdk-2.0.140.tgz#0c15899b8849928bb7af397accb4f08e9193b0cb"
   integrity sha512-tARl59+wB+uy91WiPQRM/5R9BZIWFZn1doOtsdAUFHi5gDEjj5pa02n2LJIlW9DTdgZgKgXYJz4gnlsDk0XRDw==
@@ -842,7 +842,7 @@
   resolved "https://registry.yarnpkg.com/@ctsy/covert/-/covert-1.0.1.tgz#869910f099fda3cc548094c1857730646044f3b8"
   integrity sha512-E0q/GHjAJDq26isoG+nzNt9t5QtbNGYRT5Jco6Pq8tuD8lI4zIJ0TtoQldPjhYOAmh/Kx1sUmSI6S8oeb5ZNdQ==
 
-"@ctsy/hook@*":
+"@ctsy/hook@*", "@ctsy/hook@^0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@ctsy/hook/-/hook-0.0.6.tgz#f63aece4fef145fc8b49868f2983c0a38f564f25"
   integrity sha512-GUtvGRCp3U3rz+pQL701pH486jSn5plQe43TkQJlFmp6rxnbfBnmqorwTzggHCsWxRzJX4Gg3UhqZAKYpaxSEA==
@@ -861,6 +861,18 @@
   integrity sha512-EysZX3UeKtA8SnQxuINztiHTHFsJSqYJsoUo36l1ylg7caqQ5GJN3bUe+SoO+THb3JsrtI+6VJ1Zo8Up+ZQXzQ==
   dependencies:
     buffer "^5.2.1"
+
+"@ctsy/vuex@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ctsy/vuex/-/vuex-3.0.0.tgz#19fec8c64ce8c1926718399eee33e0ae74b4dd56"
+  integrity sha512-mZAMqxncSMaz962P4NdsqHbqxgT/DAYA3z3noCzFIRuHLw1QAHSgWb3smh2BWQ/qfA//mxQ13O0HqCcz503dQw==
+  dependencies:
+    "@ctsy/api-sdk" "^2.0.138"
+    "@ctsy/hook" "^0.0.6"
+    castle-function "^1.0.3"
+    vue "^2.6"
+    vuex "^3.0"
+    vuex-module-decorators "^0.17.0"
 
 "@ctsy/ws-rpc-client@^1.0.13":
   version "1.0.13"
@@ -2269,7 +2281,7 @@ caseless@~0.12.0:
   resolved "https://registry.npm.taobao.org/caseless/download/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-castle-function@*:
+castle-function@*, castle-function@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/castle-function/-/castle-function-1.0.4.tgz#ada9f7ebc26ff929f807a8e54496fd7dd31e2695"
   integrity sha512-2YrKfcz24MoGgPYZkTIeutJ296a2d69gqbT5eBcd5w63shpJ+PnoMZ6yNiTd9IlzkEb3ZqC6S8dvqpA2iS7xeA==
@@ -8496,12 +8508,17 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha1-HuO8mhbsv1EYvjNLsV+cRvgvWCU=
 
-vue@^2.6.11:
+vue@^2.6, vue@^2.6.11:
   version "2.6.11"
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha1-dllNh31LEiNEBuhONSdcbVFBJcU=
 
-vuex@^3.4.0:
+vuex-module-decorators@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/vuex-module-decorators/-/vuex-module-decorators-0.17.0.tgz#b170006f55f579f95415d7181fe5854830473d87"
+  integrity sha512-EFzrR3oyRMTHwpIgYzhW0BVKD71+FBs2U5Mn/ZQwlsaPyROZexDXTZTSYOYeuwg0kqQsK/YBkG4sQ8B4jmVMPg==
+
+vuex@^3.0, vuex@^3.4.0:
   version "3.4.0"
   resolved "https://registry.npm.taobao.org/vuex/download/vuex-3.4.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvuex%2Fdownload%2Fvuex-3.4.0.tgz#20cc086062d750769fce1febb34e7fceeaebde45"
   integrity sha1-IMwIYGLXUHafzh/rs05/zurr3kU=
