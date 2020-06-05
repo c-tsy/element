@@ -1,11 +1,13 @@
 // import * as ElementUI from 'element-ui'
 import Vue from 'vue'
-import InputDialog from './tsy/InputDialog.vue';
+import InputDialog from './tsy/Base/InputDialog.vue';
+import UserGroupTree from './tsy/User/UserGroupTree.vue';
 
 // Vue.use(ElementUI)
 
 const components: any = {
-    InputDialog
+    InputDialog,
+    UserGroupTree
 }
 
 export default {
