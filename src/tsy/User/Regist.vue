@@ -185,11 +185,11 @@ export default class UserRister extends Vue {
     RPWD: ""
   };
 
-  handleAvatarSuccess(res, file) {
+  handleAvatarSuccess(res: any, file: any) {
     this.imageUrl = URL.createObjectURL(file.raw);
   }
 
-  beforeAvatarUpload(file) {
+  beforeAvatarUpload(file: any) {
     const isJPG = file.type === "image/jpeg";
     const isLt2M = file.size / 1024 / 1024 < 2;
 
@@ -206,23 +206,29 @@ export default class UserRister extends Vue {
     //表单验证规则
     Name: [
       {
-        validator: (r, v, cb) => {
+        validator: (r: any, v: string, cb: Function) => {
           const reg = /^[\u4E00-\u9FA5]{2,4}$/;
+          if (!reg.test(v)) {
+            cb(new Error("不合法的输入"));
+          }
         },
         trigger: "blur"
       }
     ],
     NickName: [
       {
-        validator: (r, v, cb) => {
-          let reg = /[\u4e00-\u9fa5]*[a-z]*[A-Z]*\\d*-*_*\\s*/;
+        validator: (r: any, v: string, cb: Function) => {
+          const reg = /^[\u4E00-\u9FA5]{2,4}$/;
+          if (!reg.test(v)) {
+            cb(new Error("昵称"));
+          }
         },
         trigger: "blur"
       }
     ],
     Account: [
       {
-        validator: (r, v, cb) => {
+        validator: (r: any, v: string, cb: Function) => {
           const reg = /^[A-Za-z0-9]{4,15}$/;
         },
         trigger: "blur"
@@ -230,7 +236,7 @@ export default class UserRister extends Vue {
     ],
     Phone: [
       {
-        validator: (rule, val, cb) => {
+        validator: (rule: any, val: string, cb: Function) => {
           const reg = /^[+86]{0,}1\d{10}$/;
           if (!reg.test(val)) {
             cb(new Error("手机号码错误"));
@@ -241,7 +247,7 @@ export default class UserRister extends Vue {
     ],
     PhoneCode: [
       {
-        validator: (r, v, cb) => {
+        validator: (r: any, v: string, cb: Function) => {
           if (v == "") {
             cb(new Error());
           }
@@ -251,28 +257,36 @@ export default class UserRister extends Vue {
     ],
     Email: [
       {
-        validator: (r, v, cb) => {},
+        validator: (r: any, v: string, cb: Function) => {
+          const reg = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}/;
+          if (!reg.test(v)) {
+            cb(new Error("邮箱格式错误"));
+          }
+        },
         trigger: "blur"
       }
     ],
     EmailCode: [
       {
-        validator: (r, v, cb) => {},
+        validator: (r: any, v: string, cb: Function) => {},
         trigger: "blur"
       }
     ],
     PWD: [
       {
-        validator: (r, v, cb) => {
-          const reg = /^(?![A-Za-z]+$)(?!\\d+$)(?![\\W_]+$)\\S{6,12}$/;
+        validator: (r: any, v: string, cb: Function) => {
+          const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/;
+          if (!reg.test(v)) {
+            cb(new Error("密码必须包含字母、数字"));
+          }
         },
         trigger: "blur"
       }
     ],
     RPWD: [
       {
-        validator: (r, v, cb) => {
-          const reg = /^(?![A-Za-z]+$)(?!\\d+$)(?![\\W_]+$)\\S{6,12}$/;
+        validator: (r: any, v: string, cb: Function) => {
+          const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/;
         },
         trigger: "blur"
       }
