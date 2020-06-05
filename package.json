@@ -15,9 +15,12 @@
     "build-bundle": "vue-cli-service build --target lib --name ctsy ./src/index.ts"
   },
   "dependencies": {
-    "@ctsy/api-sdk": "*",
+    "@ctsy/api-sdk": "^2.0.140",
+    "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^8.0.2",
     "terser-webpack-plugin": "^3.0.3",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
