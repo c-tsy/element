@@ -1,18 +1,18 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import Auth from '@ctsy/vuex/dist/modules/Auth'
-import UserGroup from '@ctsy/vuex/dist/modules/UserGroup'
-Vue.use(Vuex);
+import Vue from "vue";
+import Vuex from "vuex";
+import Auth from "@ctsy/vuex/dist/modules/Auth";
 
+import UserGroup from "@ctsy/vuex/dist/modules/UserGroup";
+import UserRegisetr from "@ctsy/vuex/dist/modules/UserRegister";
+
+Vue.use(Vuex);
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: {},
+  mutations: {},
+  actions: {},
   modules: {
     Auth,
-    UserGroup
+    UserGroup,
+    UserRegisetr,
   },
 });
