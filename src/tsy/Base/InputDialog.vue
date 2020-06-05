@@ -17,76 +17,37 @@
 </template>
 
 <script lang="ts">
-// export default {
-//   props: {
-//     value: {
-//       default: false,
-//       type: Boolean,
-//       required: true
-//     },
-//     title: {
-//       default: "标题",
-//       type: String,
-//       required: false
-//     },
-//     label: {
-//       default: "标签",
-//       type: String,
-//       required: false
-//     },
-//     edit: {
-//       default: "",
-//       type: String
-//     },
-//     more: {
-//       default: false,
-//       type: Boolean
-//     }
-//   },
-//   data: {
-//     pedit: ""
-//   },
-//   computed: {
-//     tags: function() {
-//       if (this.pedit.length > 0)
-//         return this.pedit.replace(/[，；;、]{1,}/g, ",").split(",");
-//       return [];
-//     },
-//     show: {
-//       get: function() {
-//         if (this.value) {
-//           this.pedit = this.edit || "";
-//         }
-//         return this.value;
-//       },
-//       set: function(v) {
-//         this.$emit("input", v);
-//       }
-//     }
-//   },
-//   methods: {
-//     close: function(s: string, k: number) {
-//       let t = this.pedit.replace(/[，；;、]{1,}/g, ",").split(",");
-//       t.splice(k, 1);
-//       this.pedit = t.join(",");
-//     },
-//     ok() {
-//       this.$emit("ok", this.more ? this.tags : this.pedit);
-//     }
-//   }
-// };
-
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 @Component({})
 export default class InputDialog extends Vue {
+  /**
+   * 控制是否显示
+   */
   @Prop({ default: false })
   value: boolean | any;
+  /**
+   * 标题
+   */
   @Prop({ default: "标题内容" })
   title?: string;
+  /**
+   * 标签内容
+   */
   @Prop({ default: "标签内容" })
   label?: string;
+  /**
+   * 编辑模式下的原文内容
+   */
   @Prop({ default: "" })
   edit: string | any;
+  /**
+   * 传递原始数据
+   */
+  @Prop({ default: () => {} })
+  data: string | any;
+  /**
+   * 是否支持输入
+   */
   @Prop({ default: false })
   more: boolean | any;
 
@@ -111,7 +72,11 @@ export default class InputDialog extends Vue {
     this.pedit = t.join(",");
   }
   ok() {
-    this.$emit("ok", this.more ? this.tags : this.pedit);
+    this.$emit("ok", {
+      Tags: this.tags,
+      Edit: this.pedit,
+      Data: this.data || {}
+    });
   }
 }
 </script>
