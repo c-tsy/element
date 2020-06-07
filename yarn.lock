@@ -837,10 +837,10 @@
     set-value "*"
     store "*"
 
-"@ctsy/api-sdk@^2.0.141":
-  version "2.0.141"
-  resolved "https://registry.npm.taobao.org/@ctsy/api-sdk/download/@ctsy/api-sdk-2.0.141.tgz#8aac7b1260c0f4d1e401a83838bf69d4f262ffd5"
-  integrity sha1-iqx7EmDA9NHkAag4OL9p1PJi/9U=
+"@ctsy/api-sdk@^2.0.147":
+  version "2.0.147"
+  resolved "https://registry.yarnpkg.com/@ctsy/api-sdk/-/api-sdk-2.0.147.tgz#3f1437578ad8575a03a4a5b6b70f0718a0c38934"
+  integrity sha512-lI6Ma309Z8bv8JUb98SVRxN/v1NMbUZXa2T7wwzowL2qY9yiSxzgXKghRaTaSGz8rA10TClnSMfk2SeClAsQfQ==
   dependencies:
     "@ctsy/covert" "*"
     "@ctsy/hook" "*"
