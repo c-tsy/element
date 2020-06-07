@@ -129,7 +129,10 @@
             label="密码"
             prop="PWD"
           >
-            <el-input v-model="Register.PWD"></el-input>
+            <el-input
+              type="password"
+              v-model="Register.PWD"
+            ></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -140,7 +143,10 @@
             label="确认密码"
             prop="RPWD"
           >
-            <el-input v-model="Register.RPWD"></el-input>
+            <el-input
+              type="password"
+              v-model="Register.RPWD"
+            ></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -167,19 +173,32 @@ export default class UserRister extends Vue {
   @Prop({ default: true }) //是否需要显示头像
   IsHead?: boolean;
 
+  /**
+   *
+   * account
+   * name
+   * nick
+   * phone
+   * email
+   * pwd
+   *
+   */
+  @Prop({ default: () => {} })
+  Reg?: { [index: string]: any };
+
   imageUrl: string = "";
 
-  Register: object = {
+  Register: { [index: string]: any } = {
     Head: "",
     Name: "张三",
     NickName: "张三",
-    Account: "15464",
-    Phone: "18148407476",
+    Account: "1512346412",
+    Phone: "18148404472",
     PhoneCode: "1234",
-    Email: "47211@qqq.com",
+    Email: "4721138@qqq.com",
     EmailCode: "1234",
     PWD: "asd1324",
-    RPWD: "asd123456"
+    RPWD: "asd1324"
   };
 
   handleAvatarSuccess(res: any, file: any) {
@@ -208,7 +227,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          const reg = /^[\u4E00-\u9FA5]{2,4}$/;
+          const reg = this.Reg?.name || /^[\u4E00-\u9FA5]{2,4}$/;
           if (!reg.test(v)) {
             cb(new Error("不合法的输入"));
             return false;
@@ -225,7 +244,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          const reg = /^[\u4E00-\u9FA5]{2,4}$/;
+          const reg = this.Reg?.nick || /^[\u4E00-\u9FA5]{2,4}$/;
           if (!reg.test(v)) {
             cb(new Error("昵称"));
             return false;
@@ -242,7 +261,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          const reg = /^[A-Za-z0-9]{4,15}$/;
+          const reg = this.Reg?.account || /^[A-Za-z0-9]{4,15}$/;
           if (!reg.test(v)) {
             cb(new Error("账号错误"));
             return false;
@@ -259,7 +278,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (rule: any, val: string, cb: Function) => {
-          const reg = /^[+86]{0,}1\d{10}$/;
+          const reg = this.Reg?.phone || /^[+86]{0,}1\d{10}$/;
           if (!reg.test(val)) {
             cb(new Error("手机号码错误"));
             return false;
@@ -276,8 +295,9 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          if (v == "") {
-            cb(new Error());
+          let reg = this.Reg?.phoneCode || /^\d{4}$/;
+          if (reg.test(v)) {
+            cb(new Error("验证码为数字"));
             return false;
           }
           cb();
@@ -334,9 +354,13 @@ export default class UserRister extends Vue {
         validator: (r: any, v: string, cb: Function) => {
           const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/;
           if (!reg.test(v)) {
-            cb(new Error("错误"));
+            cb(new Error("密码必须包含字母、数字"));
             return false;
           }
+          if (this.Register.PWD !== this.Register.RPWD) {
+            cb(new Error("密码输入不一致"));
+          }
+
           cb();
         },
         trigger: "blur"
@@ -355,13 +379,17 @@ export default class UserRister extends Vue {
    */
   async SubmitRegister(FormName: string) {
     let refs: any = this.$refs[FormName];
-    // console.log(this.$refs[FormName]);
     refs.validate(async (valid: any) => {
-      if (valid) {
-        await this.$store.dispatch("REGISTER", this.Register);
-      } else {
-        console.log("error submit!!");
+      if (!valid) {
+        this.$message.error("请完善表单信息");
         return false;
+      }
+
+      try {
+        let rs = await this.$store.dispatch("REGISTER", this.Register);
+        this.$message.success("注册成功");
+      } catch (error) {
+        this.$message.error(error.message);
       }
     });
   }
