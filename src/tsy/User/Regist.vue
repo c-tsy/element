@@ -166,6 +166,8 @@
 <script lang="ts">
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 
+import Regs from "@/lib/Reg/index";
+
 @Component({})
 export default class UserRister extends Vue {
   @Prop({ default: true })
@@ -227,7 +229,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          const reg = this.Reg?.name || /^[\u4E00-\u9FA5]{2,4}$/;
+          const reg = this.Reg?.name || Regs.name;
           if (!reg.test(v)) {
             cb(new Error("不合法的输入"));
             return false;
@@ -244,7 +246,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          const reg = this.Reg?.nick || /^[\u4E00-\u9FA5]{2,4}$/;
+          const reg = this.Reg?.nick || Regs.nick;
           if (!reg.test(v)) {
             cb(new Error("昵称"));
             return false;
@@ -261,7 +263,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          const reg = this.Reg?.account || /^[A-Za-z0-9]{4,15}$/;
+          const reg = this.Reg?.account || Regs.account;
           if (!reg.test(v)) {
             cb(new Error("账号错误"));
             return false;
@@ -278,7 +280,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (rule: any, val: string, cb: Function) => {
-          const reg = this.Reg?.phone || /^[+86]{0,}1\d{10}$/;
+          const reg = this.Reg?.phone || Regs.phone;
           if (!reg.test(val)) {
             cb(new Error("手机号码错误"));
             return false;
@@ -295,8 +297,8 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          let reg = this.Reg?.phoneCode || /^\d{4}$/;
-          if (reg.test(v)) {
+          let reg = this.Reg?.phoneCode || Regs.message;
+          if (!reg.test(v)) {
             cb(new Error("验证码为数字"));
             return false;
           }
@@ -312,7 +314,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          const reg = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}/;
+          const reg = this.Reg?.email || Regs.email;
           if (!reg.test(v)) {
             cb(new Error("邮箱格式错误"));
             return false;
@@ -325,7 +327,12 @@ export default class UserRister extends Vue {
     EmailCode: [
       {
         required: true,
-        message: "邮箱验证码不能为空",
+        message: "邮箱验证码不能为空"
+      },
+      {
+        validator: (r: any, v: string, cb: Function) => {
+          cb();
+        },
         trigger: "blur"
       }
     ],
@@ -336,7 +343,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/;
+          const reg = this.Reg?.pwd || Regs.pwd;
           if (!reg.test(v)) {
             cb(new Error("密码必须包含字母、数字"));
           }
@@ -352,15 +359,15 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/;
+          const reg = this.Reg?.pwd || Regs.pwd;
           if (!reg.test(v)) {
             cb(new Error("密码必须包含字母、数字"));
             return false;
           }
           if (this.Register.PWD !== this.Register.RPWD) {
             cb(new Error("密码输入不一致"));
+            return false;
           }
-
           cb();
         },
         trigger: "blur"
