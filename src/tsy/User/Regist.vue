@@ -9,28 +9,20 @@
       id="RegisterContainer"
     >
       <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
-      <!-- <el-form-item label="头像">
-        <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
+      <el-form-item
+        label="头像"
+        v-if="IsHead"
+      >
+        <img
+          :src="URL"
+          class="avatar-uploader  avatar"
+          @click="chooseImg"
         >
-          <img
-            v-if="imageUrl"
-            :src="imageUrl"
-            class="avatar"
-          >
-          <i
-            v-else
-            class="el-icon-plus avatar-uploader-icon"
-          ></i>
-        </el-upload>
-      </el-form-item> -->
+
+      </el-form-item>
 
       <el-row>
-        <el-col :span="8">
+        <el-col :span="12">
           <el-form-item
             label="姓名"
             prop="Name"
@@ -38,19 +30,7 @@
             <el-input v-model="Register.Name"></el-input>
           </el-form-item>
         </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="8">
-          <el-form-item
-            label="账号"
-            prop="Account"
-          >
-            <el-input v-model="Register.Account"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="8">
+        <el-col :span="12">
           <el-form-item
             label="昵称"
             prop="NickName"
@@ -63,13 +43,24 @@
       <el-row>
         <el-col :span="8">
           <el-form-item
+            label="账号"
+            prop="Account"
+          >
+            <el-input v-model="Register.Account"></el-input>
+          </el-form-item>
+        </el-col>
+
+      </el-row>
+      <el-row v-if="IsPhone">
+        <el-col :span="8">
+          <el-form-item
             label="手机号码"
             prop="Phone"
           >
             <el-input v-model="Register.Phone"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="6">
           <el-form-item
             label="验证码"
             prop="PhoneCode"
@@ -78,7 +69,7 @@
 
           </el-form-item>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="4">
           <el-button
             type="success"
             size="small"
@@ -89,10 +80,9 @@
             获取验证码
           </el-button>
         </el-col>
-
       </el-row>
 
-      <el-row>
+      <el-row v-if="IsEmail">
         <el-col :span="8">
           <el-form-item
             label="邮箱"
@@ -102,7 +92,7 @@
 
           </el-form-item>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="6">
           <el-form-item
             label="验证码"
             prop="EmailCode"
@@ -110,7 +100,7 @@
             <el-input v-model="Register.EmailCode"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="4">
           <el-button
             type="success"
             size="small"
@@ -123,6 +113,7 @@
         </el-col>
 
       </el-row>
+
       <el-row>
         <el-col :span="8">
           <el-form-item
@@ -152,11 +143,14 @@
       </el-row>
 
       <el-form-item>
-        <el-button
-          type="primary"
-          @click="SubmitRegister('Register')"
-        >注册</el-button>
-        <el-button>返回</el-button>
+        <slot name="button">
+          <el-button
+            type="primary"
+            @click="SubmitRegister('Register')"
+          >注册</el-button>
+          <el-button @click="value =false">返回</el-button>
+        </slot>
+
       </el-form-item>
     </el-form>
 
@@ -167,13 +161,18 @@
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 
 import Regs from "@/lib/Reg/index";
-
+import Upload from "@ctsy/api-sdk/dist/modules/Upload";
 @Component({})
 export default class UserRister extends Vue {
   @Prop({ default: true })
   value?: boolean;
-  @Prop({ default: true }) //是否需要显示头像
+
+  @Prop({ default: false }) //是否需要显示头像
   IsHead?: boolean;
+  @Prop({ default: true }) //是否需要显示手机号码
+  IsPhone?: boolean;
+  @Prop({ default: false }) //是否需要显示邮箱
+  IsEmail?: boolean;
 
   /**
    *
@@ -182,6 +181,7 @@ export default class UserRister extends Vue {
    * nick
    * phone
    * email
+   * emailcode
    * pwd
    *
    */
@@ -191,34 +191,17 @@ export default class UserRister extends Vue {
   imageUrl: string = "";
 
   Register: { [index: string]: any } = {
-    Head: "",
-    Name: "张三",
-    NickName: "张三",
-    Account: "1512346412",
-    Phone: "18148404472",
-    PhoneCode: "1234",
-    Email: "4721138@qqq.com",
-    EmailCode: "1234",
-    PWD: "asd1324",
-    RPWD: "asd1324"
+    Avatar: "",
+    Name: "",
+    NickName: "",
+    Account: "",
+    Phone: "",
+    PhoneCode: "",
+    Email: "",
+    EmailCode: "",
+    PWD: "",
+    RPWD: ""
   };
-
-  handleAvatarSuccess(res: any, file: any) {
-    this.imageUrl = URL.createObjectURL(file.raw);
-  }
-
-  beforeAvatarUpload(file: any) {
-    const isJPG = file.type === "image/jpeg";
-    const isLt2M = file.size / 1024 / 1024 < 2;
-
-    if (!isJPG) {
-      this.$message.error("上传头像图片只能是 JPG 格式!");
-    }
-    if (!isLt2M) {
-      this.$message.error("上传头像图片大小不能超过 2MB!");
-    }
-    return isJPG && isLt2M;
-  }
 
   Rules: object = {
     //表单验证规则
@@ -297,7 +280,7 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
-          let reg = this.Reg?.phoneCode || Regs.message;
+          let reg = this.Reg?.phoneCode || Regs.messageCode;
           if (!reg.test(v)) {
             cb(new Error("验证码为数字"));
             return false;
@@ -331,6 +314,11 @@ export default class UserRister extends Vue {
       },
       {
         validator: (r: any, v: string, cb: Function) => {
+          let reg = this.Reg?.emailCode || Regs.emailCode;
+          if (!reg.test(v)) {
+            cb(new Error("验证码格式错误"));
+            return false;
+          }
           cb();
         },
         trigger: "blur"
@@ -393,12 +381,34 @@ export default class UserRister extends Vue {
       }
 
       try {
-        let rs = await this.$store.dispatch("REGISTER", this.Register);
+        if (this.URL.startsWith("data:") && this.File) {
+          let { URL } = await Upload.upload_file(this.File, {
+            what: "head-img"
+          });
+
+          this.Register.Avatar = URL;
+        } else {
+          this.Register.Avatar = "";
+        }
+
+        let rs = await this.$store.dispatch("UserRegister", this.Register);
         this.$message.success("注册成功");
       } catch (error) {
         this.$message.error(error.message);
       }
     });
+  }
+
+  URL: string = require("@/assets/add.png");
+  File?: File;
+
+  async chooseImg() {
+    // if(this.File)
+    let files = await Upload.select_file("image/*");
+    if (files.length > 0) {
+      this.File = files[0];
+      this.URL = await Upload.local_img_preview(this.File);
+    }
   }
 
   get show() {
@@ -412,16 +422,14 @@ export default class UserRister extends Vue {
 
 <style lang="less" scoped>
 #RegisterContainer {
-  /deep/.el-upload {
+  .avatar-uploader,
+  .el-upload:hover {
+    border-color: #409eff;
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-  }
-  .avatar-uploader,
-  .el-upload:hover {
-    border-color: #409eff;
   }
   .avatar-uploader-icon {
     font-size: 28px;
