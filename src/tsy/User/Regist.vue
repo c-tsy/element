@@ -11,7 +11,7 @@
       <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
       <el-form-item
         label="头像"
-        v-if="IsHead"
+        v-if="Show.Avatar"
       >
         <img
           :src="URL"
@@ -51,7 +51,7 @@
         </el-col>
 
       </el-row>
-      <el-row v-if="IsPhone">
+      <el-row v-if="Show.IsPhone">
         <el-col :span="8">
           <el-form-item
             label="手机号码"
@@ -82,7 +82,7 @@
         </el-col>
       </el-row>
 
-      <el-row v-if="IsEmail">
+      <el-row v-if="Show.IsEmail">
         <el-col :span="8">
           <el-form-item
             label="邮箱"
@@ -167,12 +167,8 @@ export default class UserRister extends Vue {
   @Prop({ default: true })
   value?: boolean;
 
-  @Prop({ default: false }) //是否需要显示头像
-  IsHead?: boolean;
-  @Prop({ default: true }) //是否需要显示手机号码
-  IsPhone?: boolean;
-  @Prop({ default: false }) //是否需要显示邮箱
-  IsEmail?: boolean;
+  @Prop({ default: () => {} }) //是否需要显示
+  Show?: { [index: string]: any };
 
   /**
    *
