@@ -167,6 +167,12 @@ export default class UserRister extends Vue {
   @Prop({ default: true })
   value?: boolean;
 
+  /**
+   *  Avatar
+   *  IsPhone
+   * IsEmail
+   *
+   */
   @Prop({ default: () => {} }) //是否需要显示
   Show?: { [index: string]: any };
 
