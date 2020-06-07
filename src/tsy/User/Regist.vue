@@ -11,7 +11,7 @@
       <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
       <el-form-item
         label="头像"
-        v-if="Show.Avatar"
+        v-if="registerProps['Avatar']"
       >
         <img
           :src="URL"
@@ -51,7 +51,7 @@
         </el-col>
 
       </el-row>
-      <el-row v-if="Show.IsPhone">
+      <el-row v-if="registerProps.IsPhone">
         <el-col :span="8">
           <el-form-item
             label="手机号码"
@@ -82,7 +82,7 @@
         </el-col>
       </el-row>
 
-      <el-row v-if="Show.IsEmail">
+      <el-row v-if="registerProps.IsEmail">
         <el-col :span="8">
           <el-form-item
             label="邮箱"
@@ -148,7 +148,7 @@
             type="primary"
             @click="SubmitRegister('Register')"
           >注册</el-button>
-          <el-button @click="value =false">返回</el-button>
+          <el-button @click="visible =false">返回</el-button>
         </slot>
 
       </el-form-item>
@@ -162,10 +162,14 @@ import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 
 import Regs from "@/lib/Reg/index";
 import Upload from "@ctsy/api-sdk/dist/modules/Upload";
+import CustomValidate from "@/lib/Reg/regFun";
+
+// CustomValidate.Reg.name = /^\d{4}$/;
+
 @Component({})
 export default class UserRister extends Vue {
   @Prop({ default: true })
-  value?: boolean;
+  visible?: boolean;
 
   /**
    *  Avatar
@@ -174,7 +178,7 @@ export default class UserRister extends Vue {
    *
    */
   @Prop({ default: () => {} }) //是否需要显示
-  Show?: { [index: string]: any };
+  registerProps?: { [index: string]: any };
 
   /**
    *
@@ -205,6 +209,14 @@ export default class UserRister extends Vue {
     RPWD: ""
   };
 
+  /**
+   * 对输入的密码进行监听
+   */
+  @Watch("Register.PWD")
+  pwd(n: string, o: string) {
+    CustomValidate.enterPwd.val = n;
+  }
+
   Rules: object = {
     //表单验证规则
     Name: [
@@ -213,14 +225,7 @@ export default class UserRister extends Vue {
         message: "姓名不能为空"
       },
       {
-        validator: (r: any, v: string, cb: Function) => {
-          const reg = this.Reg?.name || Regs.name;
-          if (!reg.test(v)) {
-            cb(new Error("不合法的输入"));
-            return false;
-          }
-          cb();
-        },
+        validator: CustomValidate.Name_fun,
         trigger: "blur"
       }
     ],
@@ -230,14 +235,7 @@ export default class UserRister extends Vue {
         message: "昵称不能为空"
       },
       {
-        validator: (r: any, v: string, cb: Function) => {
-          const reg = this.Reg?.nick || Regs.nick;
-          if (!reg.test(v)) {
-            cb(new Error("昵称"));
-            return false;
-          }
-          cb();
-        },
+        validator: CustomValidate.Nick_fun,
         trigger: "blur"
       }
     ],
@@ -247,14 +245,7 @@ export default class UserRister extends Vue {
         message: "账号不能为空"
       },
       {
-        validator: (r: any, v: string, cb: Function) => {
-          const reg = this.Reg?.account || Regs.account;
-          if (!reg.test(v)) {
-            cb(new Error("账号错误"));
-            return false;
-          }
-          cb();
-        },
+        validator: CustomValidate.Account_fun,
         trigger: "blur"
       }
     ],
@@ -264,14 +255,7 @@ export default class UserRister extends Vue {
         message: "电话号码不能为空"
       },
       {
-        validator: (rule: any, val: string, cb: Function) => {
-          const reg = this.Reg?.phone || Regs.phone;
-          if (!reg.test(val)) {
-            cb(new Error("手机号码错误"));
-            return false;
-          }
-          cb();
-        },
+        validator: CustomValidate.Phone_fun,
         trigger: "blur"
       }
     ],
@@ -281,14 +265,7 @@ export default class UserRister extends Vue {
         message: "短信验证码不能为空"
       },
       {
-        validator: (r: any, v: string, cb: Function) => {
-          let reg = this.Reg?.phoneCode || Regs.messageCode;
-          if (!reg.test(v)) {
-            cb(new Error("验证码为数字"));
-            return false;
-          }
-          cb();
-        },
+        validator: CustomValidate.Message_fun,
         trigger: "blur"
       }
     ],
@@ -298,14 +275,7 @@ export default class UserRister extends Vue {
         message: "邮箱不能为空"
       },
       {
-        validator: (r: any, v: string, cb: Function) => {
-          const reg = this.Reg?.email || Regs.email;
-          if (!reg.test(v)) {
-            cb(new Error("邮箱格式错误"));
-            return false;
-          }
-          cb();
-        },
+        validator: CustomValidate.Email_fun,
         trigger: "blur"
       }
     ],
@@ -315,14 +285,7 @@ export default class UserRister extends Vue {
         message: "邮箱验证码不能为空"
       },
       {
-        validator: (r: any, v: string, cb: Function) => {
-          let reg = this.Reg?.emailCode || Regs.emailCode;
-          if (!reg.test(v)) {
-            cb(new Error("验证码格式错误"));
-            return false;
-          }
-          cb();
-        },
+        validator: CustomValidate.EmailCode_fun,
         trigger: "blur"
       }
     ],
@@ -332,13 +295,7 @@ export default class UserRister extends Vue {
         message: "密码不能为空"
       },
       {
-        validator: (r: any, v: string, cb: Function) => {
-          const reg = this.Reg?.pwd || Regs.pwd;
-          if (!reg.test(v)) {
-            cb(new Error("密码必须包含字母、数字"));
-          }
-          cb();
-        },
+        validator: CustomValidate.PWD_fun,
         trigger: "blur"
       }
     ],
@@ -348,18 +305,7 @@ export default class UserRister extends Vue {
         message: "重复密码不能为空"
       },
       {
-        validator: (r: any, v: string, cb: Function) => {
-          const reg = this.Reg?.pwd || Regs.pwd;
-          if (!reg.test(v)) {
-            cb(new Error("密码必须包含字母、数字"));
-            return false;
-          }
-          if (this.Register.PWD !== this.Register.RPWD) {
-            cb(new Error("密码输入不一致"));
-            return false;
-          }
-          cb();
-        },
+        validator: CustomValidate.PWD_fun,
         trigger: "blur"
       }
     ]
@@ -414,7 +360,7 @@ export default class UserRister extends Vue {
   }
 
   get show() {
-    return !!this.value;
+    return !!this.visible;
   }
   set show(v: boolean) {
     this.$emit("input", v);
