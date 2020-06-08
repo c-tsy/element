@@ -339,7 +339,7 @@ export default class UserRister extends Vue {
           this.Register.Avatar = "";
         }
 
-        let rs = await this.$store.dispatch("UserRegister", this.Register);
+        let rs = await this.$store.dispatch("get_user_register", this.Register);
         this.$message.success("注册成功");
       } catch (error) {
         this.$message.error(error.message);
