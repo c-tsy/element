@@ -2,11 +2,9 @@ import Vue from "vue";
 import Vuex from "vuex";
 import Auth from "@ctsy/vuex/dist/modules/Auth";
 
-import UserGroup from "@ctsy/vuex/dist/modules/UserGroup";
-import UserRegisetr from "@ctsy/vuex/dist/modules/UserRegister";
+import User from "@ctsy/vuex/dist/modules/User";
 
-import UserLogin from "@ctsy/vuex/dist/modules/UserLogin";
-import UserForget from "@ctsy/vuex/dist/modules/UserForGet";
+import UserGroup from "@ctsy/vuex/dist/modules/UserGroup";
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -16,8 +14,6 @@ export default new Vuex.Store({
   modules: {
     Auth,
     UserGroup,
-    UserRegisetr,
-    UserLogin,
-    UserForget,
+    User,
   },
 });
