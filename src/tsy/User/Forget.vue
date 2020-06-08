@@ -162,7 +162,7 @@ export default class Forget extends Vue {
         return false;
       }
       try {
-        let rs = await this.$store.dispatch("ForGet", this.FormData);
+        let rs = await this.$store.dispatch("get_user_forget", this.FormData);
       } catch (error) {
         this.$message.error(error.message);
       }
