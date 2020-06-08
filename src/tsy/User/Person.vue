@@ -71,9 +71,6 @@ import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 
 @Component({})
 export default class UserSelect extends Vue {
-  @Prop({ default: false })
-  value?: boolean;
-
   /**
    * 头像地址
    */

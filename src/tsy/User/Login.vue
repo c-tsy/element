@@ -131,8 +131,6 @@ import CustomValidate from "@/lib/Reg/regFun";
 
 @Component({})
 export default class Login extends Vue {
-  @Prop({ default: false })
-  visible?: boolean;
   FormData: { [index: string]: any } = {
     Account: "741852",
     // Phone: "",
@@ -162,12 +160,6 @@ export default class Login extends Vue {
     });
   }
 
-  get show() {
-    return !!this.visible;
-  }
-  set show(v: boolean) {
-    this.$emit("input", v);
-  }
   /**
    *
    * 表单验证规则

@@ -1,160 +1,158 @@
 <template>
-  <el-dialog :visible.sync="show">
-    <el-form
-      :model="Register"
-      ref="Register"
-      label-width="120px"
-      size="small"
-      :rules="Rules"
-      id="RegisterContainer"
+  <el-form
+    :model="Register"
+    ref="Register"
+    label-width="120px"
+    size="small"
+    :rules="Rules"
+    id="RegisterContainer"
+  >
+    <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
+    <el-form-item
+      label="头像"
+      v-if="registerProps['Avatar']"
     >
-      <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
-      <el-form-item
-        label="头像"
-        v-if="registerProps['Avatar']"
+      <img
+        :src="URL"
+        class="avatar-uploader  avatar"
+        @click="chooseImg"
       >
-        <img
-          :src="URL"
-          class="avatar-uploader  avatar"
-          @click="chooseImg"
+
+    </el-form-item>
+
+    <el-row>
+      <el-col :span="12">
+        <el-form-item
+          label="姓名"
+          prop="Name"
         >
+          <el-input v-model="Register.Name"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item
+          label="昵称"
+          prop="NickName"
+        >
+          <el-input v-model="Register.NickName"></el-input>
+        </el-form-item>
+      </el-col>
+    </el-row>
 
-      </el-form-item>
+    <el-row>
+      <el-col :span="8">
+        <el-form-item
+          label="账号"
+          prop="Account"
+        >
+          <el-input v-model="Register.Account"></el-input>
+        </el-form-item>
+      </el-col>
 
-      <el-row>
-        <el-col :span="12">
-          <el-form-item
-            label="姓名"
-            prop="Name"
-          >
-            <el-input v-model="Register.Name"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item
-            label="昵称"
-            prop="NickName"
-          >
-            <el-input v-model="Register.NickName"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
+    </el-row>
+    <el-row v-if="registerProps.IsPhone">
+      <el-col :span="8">
+        <el-form-item
+          label="手机号码"
+          prop="Phone"
+        >
+          <el-input v-model="Register.Phone"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="6">
+        <el-form-item
+          label="验证码"
+          prop="PhoneCode"
+        >
+          <el-input v-model="Register.PhoneCode"></el-input>
 
-      <el-row>
-        <el-col :span="8">
-          <el-form-item
-            label="账号"
-            prop="Account"
-          >
-            <el-input v-model="Register.Account"></el-input>
-          </el-form-item>
-        </el-col>
+        </el-form-item>
+      </el-col>
+      <el-col :span="4">
+        <el-button
+          type="success"
+          size="small"
+          key="Phone"
+          style="margin-left:10px"
+          @click="GetCode('Phone')"
+        >
+          获取验证码
+        </el-button>
+      </el-col>
+    </el-row>
 
-      </el-row>
-      <el-row v-if="registerProps.IsPhone">
-        <el-col :span="8">
-          <el-form-item
-            label="手机号码"
-            prop="Phone"
-          >
-            <el-input v-model="Register.Phone"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item
-            label="验证码"
-            prop="PhoneCode"
-          >
-            <el-input v-model="Register.PhoneCode"></el-input>
+    <el-row v-if="registerProps.IsEmail">
+      <el-col :span="8">
+        <el-form-item
+          label="邮箱"
+          prop="Email"
+        >
+          <el-input v-model="Register.Email"></el-input>
 
-          </el-form-item>
-        </el-col>
-        <el-col :span="4">
-          <el-button
-            type="success"
-            size="small"
-            key="Phone"
-            style="margin-left:10px"
-            @click="GetCode('Phone')"
-          >
-            获取验证码
-          </el-button>
-        </el-col>
-      </el-row>
+        </el-form-item>
+      </el-col>
+      <el-col :span="6">
+        <el-form-item
+          label="验证码"
+          prop="EmailCode"
+        >
+          <el-input v-model="Register.EmailCode"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="4">
+        <el-button
+          type="success"
+          size="small"
+          key="Email"
+          style="margin-left:10px"
+          @click="GetCode('Email')"
+        >
+          获取验证码
+        </el-button>
+      </el-col>
 
-      <el-row v-if="registerProps.IsEmail">
-        <el-col :span="8">
-          <el-form-item
-            label="邮箱"
-            prop="Email"
-          >
-            <el-input v-model="Register.Email"></el-input>
+    </el-row>
 
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item
-            label="验证码"
-            prop="EmailCode"
-          >
-            <el-input v-model="Register.EmailCode"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="4">
-          <el-button
-            type="success"
-            size="small"
-            key="Email"
-            style="margin-left:10px"
-            @click="GetCode('Email')"
-          >
-            获取验证码
-          </el-button>
-        </el-col>
+    <el-row>
+      <el-col :span="8">
+        <el-form-item
+          label="密码"
+          prop="PWD"
+        >
+          <el-input
+            type="password"
+            v-model="Register.PWD"
+          ></el-input>
+        </el-form-item>
+      </el-col>
+    </el-row>
 
-      </el-row>
+    <el-row>
+      <el-col :span="8">
+        <el-form-item
+          label="确认密码"
+          prop="RPWD"
+        >
+          <el-input
+            type="password"
+            v-model="Register.RPWD"
+          ></el-input>
+        </el-form-item>
+      </el-col>
+    </el-row>
 
-      <el-row>
-        <el-col :span="8">
-          <el-form-item
-            label="密码"
-            prop="PWD"
-          >
-            <el-input
-              type="password"
-              v-model="Register.PWD"
-            ></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
+    <el-form-item>
+      <slot name="button">
+        <el-button
+          type="primary"
+          @click="SubmitRegister('Register')"
+        >注册</el-button>
+        <el-button @click="visible =false">返回</el-button>
+      </slot>
 
-      <el-row>
-        <el-col :span="8">
-          <el-form-item
-            label="确认密码"
-            prop="RPWD"
-          >
-            <el-input
-              type="password"
-              v-model="Register.RPWD"
-            ></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
+    </el-form-item>
+  </el-form>
 
-      <el-form-item>
-        <slot name="button">
-          <el-button
-            type="primary"
-            @click="SubmitRegister('Register')"
-          >注册</el-button>
-          <el-button @click="visible =false">返回</el-button>
-        </slot>
-
-      </el-form-item>
-    </el-form>
-
-  </el-dialog>
 </template>
 
 <script lang="ts">
@@ -168,9 +166,6 @@ import CustomValidate from "@/lib/Reg/regFun";
 
 @Component({})
 export default class UserRister extends Vue {
-  @Prop({ default: true })
-  visible?: boolean;
-
   /**
    *  Avatar
    *  IsPhone
@@ -357,13 +352,6 @@ export default class UserRister extends Vue {
       this.File = files[0];
       this.URL = await Upload.local_img_preview(this.File);
     }
-  }
-
-  get show() {
-    return !!this.visible;
-  }
-  set show(v: boolean) {
-    this.$emit("input", v);
   }
 }
 </script>
