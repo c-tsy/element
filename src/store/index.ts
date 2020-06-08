@@ -5,6 +5,8 @@ import Auth from "@ctsy/vuex/dist/modules/Auth";
 import UserGroup from "@ctsy/vuex/dist/modules/UserGroup";
 import UserRegisetr from "@ctsy/vuex/dist/modules/UserRegister";
 
+import UserLogin from "@ctsy/vuex/dist/modules/UserLogin";
+
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {},
@@ -14,5 +16,6 @@ export default new Vuex.Store({
     Auth,
     UserGroup,
     UserRegisetr,
+    UserLogin,
   },
 });
