@@ -4,6 +4,7 @@
       :model="FormData"
       ref="FormData"
       label-width="80px"
+      :rules="Rules"
     >
       <el-row>
         <el-col :span="12">
@@ -18,44 +19,46 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-row>
-            <el-col :span="8">
-              <el-form-item
-                label="手机号码"
-                prop="Phone"
-              >
-                <el-input
-                  :size="inputSize"
-                  v-model="FormData.Phone"
-                ></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="6">
-              <el-form-item
-                label="验证码"
-                prop="PhoneCode"
-              >
-                <el-input
-                  :size="inputSize"
-                  v-model="FormData.PhoneCode"
-                ></el-input>
 
-              </el-form-item>
-            </el-col>
-            <el-col :span="4">
-              <el-button
-                type="success"
-                :size="inputSize"
-                key="Phone"
-                style="margin-left:10px"
-                @click="GetCode('Phone')"
-              >
-                获取验证码
-              </el-button>
-            </el-col>
-          </el-row>
         </el-col>
       </el-row>
+      <el-row>
+        <el-col :span="8">
+          <el-form-item
+            label="手机号码"
+            prop="Phone"
+          >
+            <el-input
+              :size="inputSize"
+              v-model="FormData.Phone"
+            ></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item
+            label="验证码"
+            prop="PhoneCode"
+          >
+            <el-input
+              :size="inputSize"
+              v-model="FormData.PhoneCode"
+            ></el-input>
+
+          </el-form-item>
+        </el-col>
+        <el-col :span="4">
+          <el-button
+            type="success"
+            :size="inputSize"
+            key="Phone"
+            style="margin-left:10px"
+            @click="GetCode('Phone')"
+          >
+            获取验证码
+          </el-button>
+        </el-col>
+      </el-row>
+
       <el-row>
         <el-col :span="12">
           <el-form-item
@@ -84,6 +87,8 @@
 
 <script lang="ts">
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
+import CustomValidate from "@/lib/Reg/regFun";
+
 @Component({})
 export default class Forget extends Vue {
   @Prop({ default: false })
@@ -92,6 +97,48 @@ export default class Forget extends Vue {
     Account: "",
     PWD: "",
     VCode: ""
+  };
+  Rules: object = {
+    Account: [
+      {
+        required: true,
+        message: "账号不能为空"
+      },
+      {
+        validator: CustomValidate.Account_fun,
+        trigger: "blur"
+      }
+    ],
+    Phone: [
+      {
+        required: true,
+        message: "电话号码不能为空"
+      },
+      {
+        validator: CustomValidate.Phone_fun,
+        trigger: "blur"
+      }
+    ],
+    PhoneCode: [
+      {
+        required: true,
+        message: "短信验证码不能为空"
+      },
+      {
+        validator: CustomValidate.Message_fun,
+        trigger: "blur"
+      }
+    ],
+    PWD: [
+      {
+        required: true,
+        message: "密码不能为空"
+      },
+      {
+        validator: CustomValidate.PWD_fun,
+        trigger: "blur"
+      }
+    ]
   };
   inputSize: string = "small";
 
@@ -115,7 +162,10 @@ export default class Forget extends Vue {
         return false;
       }
       try {
-      } catch (error) {}
+        let rs = await this.$store.dispatch("ForGet", this.FormData);
+      } catch (error) {
+        this.$message.error(error.message);
+      }
     });
   }
 }
