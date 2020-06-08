@@ -1,28 +1,28 @@
 <template>
-  <el-dialog :visible.sync="show">
-    <!-- 账号/密码/验证码 -->
-    <el-form
-      :model="FormData"
-      ref="FormData"
-      label-width="80px"
-      :rules="Rules"
-    >
-      <el-row>
-        <el-col :span="12">
-          <el-form-item
-            label="账号"
-            prop="Account"
-          >
-            <el-input
-              :size="inputSize"
-              v-model="FormData.Account"
-            ></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12"></el-col>
-      </el-row>
+  <!-- <el-dialog :visible.sync="show"> -->
+  <!-- 账号/密码/验证码 -->
+  <el-form
+    :model="FormData"
+    ref="FormData"
+    label-width="80px"
+    :rules="Rules"
+  >
+    <el-row>
+      <el-col :span="12">
+        <el-form-item
+          label="账号"
+          prop="Account"
+        >
+          <el-input
+            :size="inputSize"
+            v-model="FormData.Account"
+          ></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12"></el-col>
+    </el-row>
 
-      <!-- <el-row>
+    <!-- <el-row>
         <el-col :span="8">
           <el-form-item
             label="手机号码"
@@ -59,7 +59,7 @@
         </el-col>
       </el-row> -->
 
-      <!-- <el-row>
+    <!-- <el-row>
         <el-col :span="8">
           <el-form-item
             label="邮箱"
@@ -97,32 +97,32 @@
 
       </el-row> -->
 
-      <el-row>
-        <el-col :span="8">
-          <el-form-item
-            label="密码"
-            prop="PWD"
-          >
-            <el-input
-              :size="inputSize"
-              type="password"
-              v-model="FormData.PWD"
-            ></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
+    <el-row>
+      <el-col :span="8">
+        <el-form-item
+          label="密码"
+          prop="PWD"
+        >
+          <el-input
+            :size="inputSize"
+            type="password"
+            v-model="FormData.PWD"
+          ></el-input>
+        </el-form-item>
+      </el-col>
+    </el-row>
 
-      <el-form-item>
-        <el-button
-          type="primary"
-          @click="Login('FormData')"
-          :size="inputSize"
-        >登录</el-button>
-        <el-button>取消</el-button>
-      </el-form-item>
-    </el-form>
+    <el-form-item>
+      <el-button
+        type="primary"
+        @click="Login('FormData')"
+        :size="inputSize"
+      >登录</el-button>
+      <el-button>取消</el-button>
+    </el-form-item>
+  </el-form>
 
-  </el-dialog>
+  <!-- </el-dialog> -->
 </template>
 
 <script lang="ts">
@@ -134,12 +134,12 @@ export default class Login extends Vue {
   @Prop({ default: false })
   visible?: boolean;
   FormData: { [index: string]: any } = {
-    Account: "",
+    Account: "741852",
     // Phone: "",
     // PhoneCode: "",
     // Email: "",
     // EmailCode: "",
-    PWD: ""
+    PWD: "asd123"
   };
   inputSize: string = "small";
 
@@ -154,7 +154,7 @@ export default class Login extends Vue {
         return false;
       }
       try {
-        let rs = await this.$store.dispatch("UserLogin", this.FormData);
+        let rs = await this.$store.dispatch("get_user_login", this.FormData);
         this.$message.success("登录成功");
       } catch (e) {
         this.$message.error(e.message);
