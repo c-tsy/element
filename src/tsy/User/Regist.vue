@@ -5,7 +5,6 @@
     label-width="120px"
     size="small"
     :rules="Rules"
-    id="RegisterContainer"
   >
     <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
     <el-form-item
@@ -56,7 +55,10 @@
           label="手机号码"
           prop="Phone"
         >
-          <el-input v-model="Register.Phone"></el-input>
+          <el-input
+            :size="inputSize"
+            v-model="Register.Phone"
+          ></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="6">
@@ -64,19 +66,22 @@
           label="验证码"
           prop="PhoneCode"
         >
-          <el-input v-model="Register.PhoneCode"></el-input>
+          <el-input
+            :size="inputSize"
+            v-model="Register.PhoneCode"
+          ></el-input>
 
         </el-form-item>
       </el-col>
       <el-col :span="4">
         <el-button
           type="success"
-          size="small"
+          :size="inputSize"
           key="Phone"
           style="margin-left:10px"
           @click="GetCode('Phone')"
         >
-          获取验证码
+          获取短信验证码
         </el-button>
       </el-col>
     </el-row>
@@ -107,7 +112,7 @@
           style="margin-left:10px"
           @click="GetCode('Email')"
         >
-          获取验证码
+          获取邮箱验证码
         </el-button>
       </el-col>
 
@@ -166,6 +171,7 @@ import CustomValidate from "@/lib/Reg/regFun";
 
 @Component({})
 export default class UserRister extends Vue {
+  inputSize: string = "small";
   /**
    *  Avatar
    *  IsPhone
@@ -357,28 +363,4 @@ export default class UserRister extends Vue {
 </script>
 
 <style lang="less" scoped>
-#RegisterContainer {
-  .avatar-uploader,
-  .el-upload:hover {
-    border-color: #409eff;
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 154px;
-    height: 154px;
-    line-height: 154px;
-    text-align: center;
-  }
-  .avatar {
-    width: 154px;
-    height: 154px;
-    display: block;
-  }
-}
 </style>

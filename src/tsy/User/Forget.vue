@@ -2,7 +2,8 @@
   <el-form
     :model="FormData"
     ref="FormData"
-    label-width="80px"
+    label-width="120px"
+    size="small"
     :rules="Rules"
   >
     <el-row>
@@ -17,10 +18,8 @@
           ></el-input>
         </el-form-item>
       </el-col>
-      <el-col :span="12">
-
-      </el-col>
     </el-row>
+
     <el-row>
       <el-col :span="8">
         <el-form-item
@@ -53,7 +52,7 @@
           style="margin-left:10px"
           @click="GetCode('Phone')"
         >
-          获取验证码
+          获取短信验证码
         </el-button>
       </el-col>
     </el-row>

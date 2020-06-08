@@ -118,7 +118,7 @@
         @click="Login('FormData')"
         :size="inputSize"
       >登录</el-button>
-      <el-button>取消</el-button>
+      <el-button :size="inputSize">取消</el-button>
     </el-form-item>
   </el-form>
 
