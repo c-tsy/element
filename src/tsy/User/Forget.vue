@@ -35,11 +35,11 @@
       <el-col :span="6">
         <el-form-item
           label="验证码"
-          prop="PhoneCode"
+          prop="MessageCode"
         >
           <el-input
             :size="inputSize"
-            v-model="FormData.PhoneCode"
+            v-model="FormData.MessageCode"
           ></el-input>
 
         </el-form-item>
@@ -84,56 +84,21 @@
 
 <script lang="ts">
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
-import CustomValidate from "@/lib/Reg/regFun";
-
+import ElementFormRules from "@/lib/ElementFormRules/index";
+const ERules = new ElementFormRules.defalultRules();
 @Component({})
 export default class Forget extends Vue {
   FormData: { [index: string]: any } = {
     Account: "",
     PWD: "",
+    MessageCode: "",
     VCode: ""
   };
   Rules: object = {
-    Account: [
-      {
-        required: true,
-        message: "账号不能为空"
-      },
-      {
-        validator: CustomValidate.ValiteAccount_fun,
-        trigger: "blur"
-      }
-    ],
-    Phone: [
-      {
-        required: true,
-        message: "电话号码不能为空"
-      },
-      {
-        validator: CustomValidate.ValitePhone_fun,
-        trigger: "blur"
-      }
-    ],
-    PhoneCode: [
-      {
-        required: true,
-        message: "短信验证码不能为空"
-      },
-      {
-        validator: CustomValidate.ValiteMessage_fun,
-        trigger: "blur"
-      }
-    ],
-    PWD: [
-      {
-        required: true,
-        message: "密码不能为空"
-      },
-      {
-        validator: CustomValidate.ValitePWD_fun,
-        trigger: "blur"
-      }
-    ]
+    Account: ERules.Account,
+    Phone: ERules.Phone,
+    MessageCode: ERules.MessageCode,
+    PWD: ERules.PWD
   };
   inputSize: string = "small";
 
