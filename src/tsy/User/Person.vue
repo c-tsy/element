@@ -111,7 +111,7 @@ export default class UserSelect extends Vue {
   };
 
   get info() {
-    return this.$store.getters.info;
+    return this.$store.state.User.UserInfo;
   }
 }
 </script>
