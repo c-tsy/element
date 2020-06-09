@@ -163,7 +163,6 @@
 <script lang="ts">
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 
-import Regs from "@/lib/Reg/index";
 import Upload from "@ctsy/api-sdk/dist/modules/Upload";
 
 import CustomValidate from "@/lib/Reg/regFun";
