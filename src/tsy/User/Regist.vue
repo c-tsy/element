@@ -209,7 +209,10 @@ export default class UserRister extends Vue {
     Email: "",
     EmailCode: "",
     PWD: "",
-    RPWD: ""
+    RPWD: "",
+    Contacts: [], //联系人信息列表
+    Sex: "",
+    PUID: ""
   };
 
   /**
