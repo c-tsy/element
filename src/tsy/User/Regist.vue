@@ -215,7 +215,7 @@ export default class UserRister extends Vue {
    */
   @Watch("Register.PWD")
   pwd(n: string, o: string) {
-    CustomValidate.enterPwd.val = n;
+    CustomValidate.EnterRPWD.val = n;
   }
 
   Rules: object = {
