@@ -1,43 +1,7 @@
-import Regs from "@/lib/Reg/index";
+import PublicReg from "@/lib/Reg";
 
+const Regs = new PublicReg.Regs();
 namespace CustomValidate {
-  /**
-   * 传入自定义正则
-   */
-  export class regValidate {
-    /**
-     * 姓名
-     */
-    name?: RegExp;
-    /**
-     * 昵称
-     */
-    nick?: RegExp;
-    /**
-     * 账号
-     */
-    account?: RegExp;
-    /**
-     * 电话号码
-     */
-    phone?: RegExp;
-    /**
-     * 短信验证码
-     */
-    phoneCode?: RegExp;
-    /**
-     * 邮箱
-     */
-    email?: RegExp;
-    /**
-     * 邮箱验证码
-     */
-    emailCode?: RegExp;
-    /**
-     * 密码，重复密码与密码共用
-     *      */
-    pwd?: RegExp;
-  }
   /**
    * 是否是有重复密码
    */
@@ -49,7 +13,6 @@ namespace CustomValidate {
    */
   export const EnterRPWD = new ISRPWD();
 
-  export const Reg = new regValidate();
   /**
    * 校验 姓名
    * @param r
@@ -57,7 +20,7 @@ namespace CustomValidate {
    * @param cb
    */
   export function ValiteName_fun(r: any, v: string, cb: Function) {
-    const reg = Reg.name || Regs.name;
+    const reg = Regs.name;
 
     if (!reg.test(v)) {
       cb(new Error("不合法的输入"));
@@ -72,7 +35,7 @@ namespace CustomValidate {
    * @param cb
    */
   export function ValiteNick_fun(r: any, v: string, cb: Function) {
-    const reg = Reg.nick || Regs.nick;
+    const reg = Regs.nick;
     if (!reg.test(v)) {
       cb(new Error("昵称必须为中文"));
       return false;
@@ -86,7 +49,7 @@ namespace CustomValidate {
    * @param cb
    */
   export function ValiteAccount_fun(r: any, v: string, cb: Function) {
-    const reg = Reg.account || Regs.account;
+    const reg = Regs.account;
     if (!reg.test(v)) {
       cb(new Error("账号格式错误"));
       return false;
@@ -100,7 +63,7 @@ namespace CustomValidate {
    * @param cb
    */
   export function ValitePhone_fun(rule: any, val: string, cb: Function) {
-    const reg = Reg.phone || Regs.phone;
+    const reg = Regs.phone;
     if (!reg.test(val)) {
       cb(new Error("手机号码格式错误"));
       return false;
@@ -114,7 +77,7 @@ namespace CustomValidate {
    * @param cb
    */
   export function ValiteMessage_fun(r: any, v: string, cb: Function) {
-    let reg = Reg.phoneCode || Regs.messageCode;
+    let reg = Regs.messageCode;
     if (!reg.test(v)) {
       cb(new Error("短信验证码不合法"));
       return false;
@@ -128,7 +91,7 @@ namespace CustomValidate {
    * @param cb
    */
   export function ValiteEmail_fun(r: any, v: string, cb: Function) {
-    const reg = Reg.email || Regs.email;
+    const reg = Regs.email;
     if (!reg.test(v)) {
       cb(new Error("邮箱格式错误"));
       return false;
@@ -142,7 +105,7 @@ namespace CustomValidate {
    * @param cb
    */
   export function ValiteEmailCode_fun(r: any, v: string, cb: Function) {
-    let reg = Reg.emailCode || Regs.emailCode;
+    let reg = Regs.emailCode;
     if (!reg.test(v)) {
       cb(new Error("邮箱验证码不合法"));
       return false;
@@ -160,7 +123,7 @@ namespace CustomValidate {
    * @param cb
    */
   export function ValitePWD_fun(r: any, v: string, cb: Function) {
-    const reg = Reg.pwd || Regs.pwd;
+    const reg = Regs.pwd;
     if (!reg.test(v)) {
       cb(new Error("密码必须包含字母、数字"));
       return false;
