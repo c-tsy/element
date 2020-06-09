@@ -165,8 +165,8 @@ namespace CustomValidate {
       cb(new Error("密码必须包含字母、数字"));
       return false;
     }
-    if (enterPwd.val?.trim()) {
-      if (enterPwd.val?.trim() !== v.trim()) {
+    if (EnterRPWD.val?.trim()) {
+      if (EnterRPWD.val?.trim() !== v.trim()) {
         cb(new Error("两次密码输入不一致"));
         return false;
       }
