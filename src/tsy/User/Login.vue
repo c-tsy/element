@@ -132,14 +132,15 @@ import CustomValidate from "@/lib/Reg/regFun";
 @Component({})
 export default class Login extends Vue {
   FormData: { [index: string]: any } = {
-    Account: "741852",
+    Account: "",
     // Phone: "",
     // PhoneCode: "",
     // Email: "",
     // EmailCode: "",
-    PWD: "asd123"
+    PWD: ""
   };
-  inputSize: string = "small";
+  @Prop({ default: "small" })
+  inputSize?: string;
 
   /**
    * 登录
