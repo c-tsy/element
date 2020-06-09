@@ -33,7 +33,7 @@
           label="找回密码"
           name="forget"
         >
-          <CtsyForGet key="register"> </CtsyForGet>
+          <CtsyForget key="register"> </CtsyForget>
 
         </el-tab-pane>
 

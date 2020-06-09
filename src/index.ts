@@ -4,7 +4,7 @@ import InputDialog from "./tsy/Base/InputDialog.vue";
 import UserGroupTree from "./tsy/User/UserGroupTree.vue";
 
 import Register from "./tsy/User/Regist.vue";
-import ForGet from "./tsy/User/Forget.vue";
+import Forget from "./tsy/User/Forget.vue";
 import Login from "./tsy/User/Login.vue";
 import PersonInfo from "./tsy/User/Person.vue";
 import UserModule from "./tsy/User/UserModule.vue";
@@ -15,7 +15,7 @@ const components: any = {
   InputDialog,
   UserGroupTree,
   Register,
-  ForGet,
+  Forget,
   Login,
   PersonInfo,
   UserModule,
