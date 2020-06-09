@@ -88,8 +88,6 @@ import CustomValidate from "@/lib/Reg/regFun";
 
 @Component({})
 export default class Forget extends Vue {
-  @Prop({ default: false })
-  visible?: boolean;
   FormData: { [index: string]: any } = {
     Account: "",
     PWD: "",
@@ -102,7 +100,7 @@ export default class Forget extends Vue {
         message: "账号不能为空"
       },
       {
-        validator: CustomValidate.Account_fun,
+        validator: CustomValidate.ValiteAccount_fun,
         trigger: "blur"
       }
     ],
@@ -112,7 +110,7 @@ export default class Forget extends Vue {
         message: "电话号码不能为空"
       },
       {
-        validator: CustomValidate.Phone_fun,
+        validator: CustomValidate.ValitePhone_fun,
         trigger: "blur"
       }
     ],
@@ -122,7 +120,7 @@ export default class Forget extends Vue {
         message: "短信验证码不能为空"
       },
       {
-        validator: CustomValidate.Message_fun,
+        validator: CustomValidate.ValiteMessage_fun,
         trigger: "blur"
       }
     ],
@@ -132,7 +130,7 @@ export default class Forget extends Vue {
         message: "密码不能为空"
       },
       {
-        validator: CustomValidate.PWD_fun,
+        validator: CustomValidate.ValitePWD_fun,
         trigger: "blur"
       }
     ]
@@ -141,12 +139,6 @@ export default class Forget extends Vue {
 
   // 741852
   // asd456   123
-  get show() {
-    return !!this.visible;
-  }
-  set show(v: boolean) {
-    this.$emit("input", v);
-  }
 
   /**
    * 找回密码

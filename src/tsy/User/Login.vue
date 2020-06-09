@@ -171,7 +171,7 @@ export default class Login extends Vue {
         message: "姓名不能为空"
       },
       {
-        validator: CustomValidate.Name_fun,
+        validator: CustomValidate.ValiteName_fun,
         trigger: "blur"
       }
     ],
@@ -181,7 +181,7 @@ export default class Login extends Vue {
         message: "昵称不能为空"
       },
       {
-        validator: CustomValidate.Nick_fun,
+        validator: CustomValidate.ValiteNick_fun,
         trigger: "blur"
       }
     ],
@@ -191,7 +191,7 @@ export default class Login extends Vue {
         message: "账号不能为空"
       },
       {
-        validator: CustomValidate.Account_fun,
+        validator: CustomValidate.ValiteAccount_fun,
         trigger: "blur"
       }
     ],
@@ -201,7 +201,7 @@ export default class Login extends Vue {
         message: "电话号码不能为空"
       },
       {
-        validator: CustomValidate.Phone_fun,
+        validator: CustomValidate.ValitePhone_fun,
         trigger: "blur"
       }
     ],
@@ -211,7 +211,7 @@ export default class Login extends Vue {
         message: "短信验证码不能为空"
       },
       {
-        validator: CustomValidate.Message_fun,
+        validator: CustomValidate.ValiteMessage_fun,
         trigger: "blur"
       }
     ],
@@ -221,7 +221,7 @@ export default class Login extends Vue {
         message: "邮箱不能为空"
       },
       {
-        validator: CustomValidate.Email_fun,
+        validator: CustomValidate.ValiteEmail_fun,
         trigger: "blur"
       }
     ],
@@ -231,7 +231,7 @@ export default class Login extends Vue {
         message: "邮箱验证码不能为空"
       },
       {
-        validator: CustomValidate.EmailCode_fun,
+        validator: CustomValidate.ValiteEmailCode_fun,
         trigger: "blur"
       }
     ],
@@ -241,7 +241,7 @@ export default class Login extends Vue {
         message: "密码不能为空"
       },
       {
-        validator: CustomValidate.PWD_fun,
+        validator: CustomValidate.ValitePWD_fun,
         trigger: "blur"
       }
     ],
@@ -251,7 +251,7 @@ export default class Login extends Vue {
         message: "重复密码不能为空"
       },
       {
-        validator: CustomValidate.PWD_fun,
+        validator: CustomValidate.ValitePWD_fun,
         trigger: "blur"
       }
     ]
