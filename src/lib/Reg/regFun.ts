@@ -44,7 +44,10 @@ namespace CustomValidate {
   export class ISRPWD {
     val?: string;
   }
-  export const enterPwd = new ISRPWD();
+  /**
+   * 输入的重复密码
+   */
+  export const EnterRPWD = new ISRPWD();
 
   export const Reg = new regValidate();
   /**
