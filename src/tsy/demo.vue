@@ -1,14 +1,10 @@
 <template>
   <el-row>
     <el-col :span="12">
-      <!-- <CtsyRegister
-        :registerProps="show"
-        :visible='true'
-      ></CtsyRegister> -->
 
-      <CtsyLogin :visible='true'></CtsyLogin>
+      <CtsyUserModule>
 
-      <!-- <CtsyForGet :visible="true">      </CtsyForGet> -->
+      </CtsyUserModule>
 
     </el-col>
     <el-col :span="12">
