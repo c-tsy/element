@@ -129,6 +129,7 @@
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 import CustomValidate from "@/lib/Reg/regFun";
 
+CustomValidate.Reg.account = /\d{1,}/;
 @Component({})
 export default class Login extends Vue {
   FormData: { [index: string]: any } = {
@@ -155,8 +156,10 @@ export default class Login extends Vue {
       try {
         let rs = await this.$store.dispatch("get_user_login", this.FormData);
         this.$message.success("登录成功");
+        this.$emit("success", rs);
       } catch (e) {
         this.$message.error(e.message);
+        this.$emit("error", "error");
       }
     });
   }
