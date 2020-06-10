@@ -29,6 +29,7 @@
         >
           <el-input v-model="Register.Name"></el-input>
         </el-form-item>
+
       </el-col>
       <el-col :span="12">
         <el-form-item
@@ -76,16 +77,7 @@
         </el-form-item>
       </el-col>
       <el-col :span="4">
-        <el-button
-          type="success"
-          :size="inputSize"
-          key="Phone"
-          style="margin-left:10px"
-          @click="GetCode('Phone')"
-          :disabled="isDisabled == 'Phone' ? true : false  "
-        >
-          {{MessageText}}
-        </el-button>
+        <CButton></CButton>
       </el-col>
     </el-row>
 
@@ -108,16 +100,8 @@
         </el-form-item>
       </el-col>
       <el-col :span="4">
-        <el-button
-          type="success"
-          size="small"
-          key="Email"
-          style="margin-left:10px"
-          :disabled="isDisabled == 'Email' ? true : false  "
-          @click="GetCode('Email')"
-        >
-          {{EmailText}}
-        </el-button>
+        <CButton></CButton>
+
       </el-col>
 
     </el-row>
@@ -172,7 +156,13 @@ import CustomValidate from "@/lib/Reg/regFun";
 import ElementFormRules from "@/lib/ElementFormRules/index";
 const ERules = new ElementFormRules.defalultRules();
 
-@Component({})
+import CButton from "../Base/TimeOutButton.vue";
+
+@Component({
+  components: {
+    CButton
+  }
+})
 export default class UserRister extends Vue {
   /**
    * 输入框大小
@@ -233,31 +223,7 @@ export default class UserRister extends Vue {
   /**
    * 获取短信验证码
    */
-  GetCode(v: string) {
-    let TimeOutNum = this.CodeTimeOut || this.defalultCodeTimeOut;
-    this.isDisabled = v;
-    let t = setInterval(() => {
-      if (v == "Email") {
-        this.EmailText = `${TimeOutNum}s后可再次获取`;
-      }
-      if (v == "Phone") {
-        this.MessageText = `${TimeOutNum}s后可再次获取`;
-      }
-      TimeOutNum -= 1;
-      if (TimeOutNum < 0) {
-        TimeOutNum = this.CodeTimeOut || this.defalultCodeTimeOut;
-        if (v == "Email") {
-          this.EmailText = "再次获取邮箱验证码";
-        }
-        if (v == "Phone") {
-          this.MessageText = "再次获取短信验证码";
-        }
-        this.isDisabled = "";
-        clearInterval(t);
-      }
-    }, 1000);
-    this.$emit("code", v);
-  }
+  GetCode(v: string) {}
 
   /**
    *
