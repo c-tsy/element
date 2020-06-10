@@ -7,10 +7,12 @@
     :rules="Rules"
   >
     <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
+
     <el-form-item
       label="头像"
       v-if="registerProps['Avatar']"
     >
+
       <img
         :src="URL"
         class="avatar-uploader  avatar"
@@ -80,8 +82,9 @@
           key="Phone"
           style="margin-left:10px"
           @click="GetCode('Phone')"
+          :disabled="isDisabled == 'Phone' ? true : false  "
         >
-          获取短信验证码
+          {{MessageText}}
         </el-button>
       </el-col>
     </el-row>
@@ -110,9 +113,10 @@
           size="small"
           key="Email"
           style="margin-left:10px"
+          :disabled="isDisabled == 'Email' ? true : false  "
           @click="GetCode('Email')"
         >
-          获取邮箱验证码
+          {{EmailText}}
         </el-button>
       </el-col>
 
@@ -164,15 +168,31 @@
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 
 import Upload from "@ctsy/api-sdk/dist/modules/Upload";
-
 import CustomValidate from "@/lib/Reg/regFun";
-
 import ElementFormRules from "@/lib/ElementFormRules/index";
 const ERules = new ElementFormRules.defalultRules();
 
 @Component({})
 export default class UserRister extends Vue {
-  inputSize: string = "small";
+  /**
+   * 输入框大小
+   */
+  @Prop({ default: "small" })
+  inputSize?: string;
+
+  /**
+   * 获取短信验证码之后的倒计时
+   */
+  @Prop({ default: "" })
+  CodeTimeOut?: number;
+
+  defalultCodeTimeOut: number = 5;
+
+  MessageText: string = "获取短信验证码";
+  EmailText: string = "获取邮箱验证码";
+
+  isDisabled: string = "";
+
   /**
    *  Avatar
    *  IsPhone
@@ -180,21 +200,7 @@ export default class UserRister extends Vue {
    *
    */
   @Prop({ default: () => {} }) //是否需要显示
-  registerProps?: { [index: string]: any };
-
-  /**
-   *
-   * account
-   * name
-   * nick
-   * phone
-   * email
-   * emailcode
-   * pwd
-   *
-   */
-  @Prop({ default: () => {} })
-  Reg?: { [index: string]: any };
+  registerProps!: { [index: string]: any };
 
   imageUrl: string = "";
 
@@ -227,7 +233,31 @@ export default class UserRister extends Vue {
   /**
    * 获取短信验证码
    */
-  GetCode() {}
+  GetCode(v: string) {
+    let TimeOutNum = this.CodeTimeOut || this.defalultCodeTimeOut;
+    this.isDisabled = v;
+    let t = setInterval(() => {
+      if (v == "Email") {
+        this.EmailText = `${TimeOutNum}s后可再次获取`;
+      }
+      if (v == "Phone") {
+        this.MessageText = `${TimeOutNum}s后可再次获取`;
+      }
+      TimeOutNum -= 1;
+      if (TimeOutNum < 0) {
+        TimeOutNum = this.CodeTimeOut || this.defalultCodeTimeOut;
+        if (v == "Email") {
+          this.EmailText = "再次获取邮箱验证码";
+        }
+        if (v == "Phone") {
+          this.MessageText = "再次获取短信验证码";
+        }
+        this.isDisabled = "";
+        clearInterval(t);
+      }
+    }, 1000);
+    this.$emit("code", v);
+  }
 
   /**
    *
