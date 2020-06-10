@@ -45,15 +45,7 @@
         </el-form-item>
       </el-col>
       <el-col :span="4">
-        <el-button
-          type="success"
-          :size="inputSize"
-          key="Phone"
-          style="margin-left:10px"
-          @click="GetCode('Phone')"
-        >
-          获取短信验证码
-        </el-button>
+        <CButton></CButton>
       </el-col>
     </el-row>
 
@@ -86,7 +78,13 @@
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 import ElementFormRules from "@/lib/ElementFormRules/index";
 const ERules = new ElementFormRules.defalultRules();
-@Component({})
+import CButton from "../Base/TimeOutButton.vue";
+
+@Component({
+  components: {
+    CButton
+  }
+})
 export default class Forget extends Vue {
   FormData: { [index: string]: any } = {
     Account: "",
