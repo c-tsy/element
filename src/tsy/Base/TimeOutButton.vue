@@ -17,6 +17,9 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
+
+import { timeout } from "@ctsy/common";
+
 @Component
 export default class Name extends Vue {
   @Prop()
@@ -26,25 +29,26 @@ export default class Name extends Vue {
   @Prop()
   disabled?: boolean;
   @Prop()
-  Time?: number;
+  Time: number = 5;
   @Prop({ default: "获取验证码" })
   ButtonText?: string;
 
   TimeOutText: string = "";
   DefaultDisabked: boolean = false;
+  code = 0;
 
-  ClickButton() {
-    this.DefaultDisabked = true;
-    let time = this.Time || 3;
-    let t = setInterval(() => {
-      this.TimeOutText = `${time}s后可再次获取`;
-      time -= 1;
-      if (time < 0) {
+  async ClickButton() {
+    for (let i = this.Time; i >= 0; i--) {
+      this.code = i;
+      this.DefaultDisabked = true;
+      this.TimeOutText = `${this.code}s后可再次获取`;
+      if (this.code == 0) {
         this.TimeOutText = "";
         this.DefaultDisabked = false;
-        clearInterval(t);
       }
-    }, 1000);
+      await timeout(1000);
+    }
+
     this.$emit("click");
   }
 }
