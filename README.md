@@ -113,6 +113,12 @@ slot{
 
 props:{
     Size:输入框大小 参考elementui
+registerProps:{  //是否显示头像上传 电话号码验证 邮箱验证
+    Avatar: false,
+    IsPhone: true,
+    IsEmail: false
+
+    }
 }
 
 emit:{
