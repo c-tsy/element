@@ -1,86 +1,83 @@
 <template>
-<div>
-   <slot> 
-   <el-form
-    :model="FormData"
-    ref="FormData"
-    label-width="120px"
-    size="small"
-    :rules="Rules"
-  >
-    <el-row>
-      <el-col :span="12">
-        <el-form-item
-          label="账号"
-          prop="Account"
-        >
-          <el-input
-            :size="Size"
-            v-model="FormData.Account"
-          ></el-input>
-        </el-form-item>
-      </el-col>
-    </el-row>
+  <div>
+    <slot>
+      <el-form
+        :model="FormData"
+        ref="FormData"
+        label-width="120px"
+        size="small"
+        :rules="Rules"
+      >
+        <el-row>
+          <el-col :span="12">
+            <el-form-item
+              label="账号"
+              prop="Account"
+            >
+              <el-input
+                :size="Size"
+                v-model="FormData.Account"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-    <slot name="email">
+        <slot name="email">
+        </slot>
+
+        <el-row>
+          <el-col :span="8">
+            <el-form-item
+              label="手机号码"
+              prop="Phone"
+            >
+              <el-input
+                :size="Size"
+                v-model="FormData.Phone"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item
+              label="验证码"
+              prop="MessageCode"
+            >
+              <el-input
+                :size="Size"
+                v-model="FormData.MessageCode"
+              ></el-input>
+
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <CButton :Time="5"></CButton>
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-col :span="12">
+            <el-form-item
+              label="新密码"
+              prop="PWD"
+            >
+              <el-input
+                :size="Size"
+                v-model="FormData.PWD"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12"></el-col>
+        </el-row>
+        <el-form-item>
+          <el-button
+            type="primary"
+            @click="ForGet('FormData')"
+          >设置</el-button>
+          <el-button @click="Cancel">取消</el-button>
+        </el-form-item>
+      </el-form>
     </slot>
-
-    <el-row>
-      <el-col :span="8">
-        <el-form-item
-          label="手机号码"
-          prop="Phone"
-        >
-          <el-input
-            :size="Size"
-            v-model="FormData.Phone"
-          ></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="6">
-        <el-form-item
-          label="验证码"
-          prop="MessageCode"
-        >
-          <el-input
-            :size="Size"
-            v-model="FormData.MessageCode"
-          ></el-input>
-
-        </el-form-item>
-      </el-col>
-      <el-col :span="4">
-        <CButton
-          :Time="5"
-        ></CButton>
-      </el-col>
-    </el-row>
-
-    <el-row>
-      <el-col :span="12">
-        <el-form-item
-          label="新密码"
-          prop="PWD"
-        >
-          <el-input
-            :size="Size"
-            v-model="FormData.PWD"
-          ></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="12"></el-col>
-    </el-row>
-    <el-form-item>
-      <el-button
-        type="primary"
-        @click="ForGet('FormData')"
-      >设置</el-button>
-      <el-button>取消</el-button>
-    </el-form-item>
-  </el-form>
-     </slot>
-</div>
- 
+  </div>
 
 </template>
 
@@ -109,8 +106,8 @@ export default class Forget extends Vue {
     MessageCode: ERules.MessageCode,
     PWD: ERules.PWD
   };
-  @Prop({default:'small'})
-  Size?: string ;
+  @Prop({ default: "small" })
+  Size?: string;
   /**
    * 找回密码
    */
@@ -124,12 +121,18 @@ export default class Forget extends Vue {
       try {
         let rs = await this.$store.dispatch("get_user_forget", this.FormData);
         this.$message.success("设置成功");
-        this.$emit('success')
+        this.$emit("success");
       } catch (error) {
         this.$message.error(error.message);
-        this.$emit('error') 
+        this.$emit("error");
       }
     });
+  }
+  /**
+   * 取消
+   */
+  Cancel() {
+    this.$emit("cancel", false);
   }
 }
 </script>

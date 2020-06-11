@@ -171,7 +171,7 @@
               type="primary"
               @click="SubmitRegister('Register')"
             >注册</el-button>
-            <el-button @click="visible =false">返回</el-button>
+            <el-button @click="Cancel">返回</el-button>
           </slot>
 
         </el-form-item>
@@ -297,6 +297,12 @@ export default class UserRister extends Vue {
       this.File = files[0];
       this.URL = await Upload.local_img_preview(this.File);
     }
+  }
+  /**
+   * 取消
+   */
+  Cancel() {
+    this.$emit("cancel", false);
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <!-- <el-dialog :visible.sync="show"> -->
   <!-- 账号/密码/验证码 -->
-  
+
   <el-form
     :model="FormData"
     ref="FormData"
@@ -119,7 +119,10 @@
         @click="Login('FormData')"
         :size="Size"
       >登录</el-button>
-      <el-button :size="Size">取消</el-button>
+      <el-button
+        :size="Size"
+        @click="Cancel"
+      >取消</el-button>
     </el-form-item>
   </el-form>
 
@@ -167,6 +170,12 @@ export default class Login extends Vue {
     });
   }
 
+  /**
+   * 取消
+   */
+  Cancel() {
+    this.$emit("cancel", false);
+  }
   /**
    *
    * 表单验证规则
