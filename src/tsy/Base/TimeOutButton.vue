@@ -47,6 +47,7 @@ export default class Name extends Vue {
       this.DefaultDisabked = true;
       this.TimeOutText = `${this.code}s后可再次获取`;
       if (this.code == 0) {
+        this.$emit("TimeEnd");
         this.TimeOutText = "";
         this.DefaultDisabked = false;
       }
