@@ -2,7 +2,7 @@
 <template>
   <div>
     <el-button
-      :type="inputSize||'success'"
+      :type="type||'success'"
       :size="inputSize || 'small' "
       style="margin-left:10px"
       @click="ClickButton"
@@ -22,13 +22,13 @@ import { timeout } from "@ctsy/common";
 
 @Component
 export default class Name extends Vue {
-  @Prop()
+  @Prop({ default: "small" })
   inputSize?: string;
-  @Prop()
+  @Prop({ default: "success" })
   type?: string;
-  @Prop()
+  @Prop({ default: false })
   disabled?: boolean;
-  @Prop({ default: 0 })
+  @Prop({ default: 60 })
   Time?: number; //可以传入时间
   @Prop({ default: "获取验证码" })
   ButtonText?: string;
@@ -38,7 +38,7 @@ export default class Name extends Vue {
   code = 0;
 
   async ClickButton() {
-    if (!this.Time || this.Time < 0) {
+    if ("number" == typeof this.Time && this.Time <= 0) {
       return console.error("倒计时时间不能<=0");
     }
 
