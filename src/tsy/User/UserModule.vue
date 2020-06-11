@@ -26,7 +26,10 @@
           <CtsyRegister
             :registerProps="show"
             key="forget"
-          ></CtsyRegister>
+            @code="getcode"
+            :CodeTimeOut="10"
+          >
+          </CtsyRegister>
 
         </el-tab-pane>
         <el-tab-pane
@@ -46,6 +49,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
+
 @Component
 export default class Name extends Vue {
   @Prop({ default: true })
@@ -59,6 +63,9 @@ export default class Name extends Vue {
     IsEmail: true
   };
 
+  getcode(v: any) {
+    console.log(v);
+  }
   handleClick() {}
 }
 </script>
