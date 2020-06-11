@@ -28,8 +28,8 @@ export default class Name extends Vue {
   type?: string;
   @Prop()
   disabled?: boolean;
-  @Prop()
-  Time: number = 60; //可以传入时间
+  @Prop({ default: 0 })
+  Time?: number; //可以传入时间
   @Prop({ default: "获取验证码" })
   ButtonText?: string;
 
@@ -38,10 +38,11 @@ export default class Name extends Vue {
   code = 0;
 
   async ClickButton() {
-    if (this.Time < 0) {
+    if (!this.Time || this.Time < 0) {
       return console.error("倒计时时间不能<=0");
     }
-    for (let i = this.Time; i >= 0; i--) {
+
+    for (let i = this.Time || 60; i >= 0; i--) {
       this.code = i;
       this.DefaultDisabked = true;
       this.TimeOutText = `${this.code}s后可再次获取`;
