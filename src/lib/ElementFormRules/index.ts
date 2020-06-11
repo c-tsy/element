@@ -11,7 +11,7 @@ namespace ElementFromRules {
         message: "姓名不能为空",
       },
       {
-        validator: CustomValidate.ValiteName_fun,
+        validator: CustomValidate.ValiteName,
         trigger: "blur",
       },
     ],
@@ -21,7 +21,7 @@ namespace ElementFromRules {
         message: "昵称不能为空",
       },
       {
-        validator: CustomValidate.ValiteNick_fun,
+        validator: CustomValidate.ValiteNick,
         trigger: "blur",
       },
     ],
@@ -31,7 +31,7 @@ namespace ElementFromRules {
         message: "账号不能为空",
       },
       {
-        validator: CustomValidate.ValiteAccount_fun,
+        validator: CustomValidate.ValiteAccount,
         trigger: "blur",
       },
     ],
@@ -41,7 +41,7 @@ namespace ElementFromRules {
         message: "电话号码不能为空",
       },
       {
-        validator: CustomValidate.ValitePhone_fun,
+        validator: CustomValidate.ValitePhone,
         trigger: "blur",
       },
     ],
@@ -51,7 +51,7 @@ namespace ElementFromRules {
         message: "短信验证码不能为空",
       },
       {
-        validator: CustomValidate.ValiteMessage_fun,
+        validator: CustomValidate.ValiteMessage,
         trigger: "blur",
       },
     ],
@@ -61,7 +61,7 @@ namespace ElementFromRules {
         message: "邮箱不能为空",
       },
       {
-        validator: CustomValidate.ValiteEmail_fun,
+        validator: CustomValidate.ValiteEmail,
         trigger: "blur",
       },
     ],
@@ -71,7 +71,7 @@ namespace ElementFromRules {
         message: "邮箱验证码不能为空",
       },
       {
-        validator: CustomValidate.ValiteEmailCode_fun,
+        validator: CustomValidate.ValiteEmailCode,
         trigger: "blur",
       },
     ],
@@ -81,7 +81,7 @@ namespace ElementFromRules {
         message: "密码不能为空",
       },
       {
-        validator: CustomValidate.ValitePWD_fun,
+        validator: CustomValidate.ValitePWD,
         trigger: "blur",
       },
     ],
@@ -91,7 +91,7 @@ namespace ElementFromRules {
         message: "重复密码不能为空",
       },
       {
-        validator: CustomValidate.ValitePWD_fun,
+        validator: CustomValidate.ValitePWD,
         trigger: "blur",
       },
     ],
