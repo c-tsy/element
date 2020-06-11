@@ -10,8 +10,8 @@
         :rules="Rules"
       >
         <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
-
-        <el-form-item
+        <slot name='avatar'>
+    <el-form-item
           label="头像"
           v-if="registerProps['Avatar']"
         >
@@ -22,6 +22,8 @@
             @click="chooseImg"
           >
         </el-form-item>
+        </slot>
+    
 
         <el-row>
           <el-col :span="12">
@@ -69,7 +71,7 @@
                 prop="Phone"
               >
                 <el-input
-                  :size="inputSize"
+                  :size="Size"
                   v-model="Register.Phone"
                 ></el-input>
               </el-form-item>
@@ -82,7 +84,7 @@
                 prop="MessageCode"
               >
                 <el-input
-                  :size="inputSize"
+                  :size="Size"
                   v-model="Register.PhoneCode"
                 ></el-input>
 
@@ -194,7 +196,7 @@ export default class UserRister extends Vue {
    * 输入框大小
    */
   @Prop({ default: "small" })
-  inputSize?: string;
+  Size?: string;
 
   /**
    * 获取短信验证码之后的倒计时
