@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@ctsy/api-sdk": "^2.0.147",
+    "@ctsy/common": "^1.0.1",
     "@ctsy/vuex": "^3.0.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
