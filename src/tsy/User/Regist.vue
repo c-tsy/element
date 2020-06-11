@@ -239,7 +239,7 @@ export default class UserRister extends Vue {
   };
 
   /**
-   * 对输入的密码进行监听
+   * 对输入的重复密码进行监听
    */
   @Watch("Register.PWD")
   pwd(n: string, o: string) {

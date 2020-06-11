@@ -1,6 +1,7 @@
 <template>
   <!-- <el-dialog :visible.sync="show"> -->
   <!-- 账号/密码/验证码 -->
+  
   <el-form
     :model="FormData"
     ref="FormData"
