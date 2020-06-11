@@ -1,5 +1,7 @@
 <template>
-  <el-form
+<div>
+   <slot> 
+   <el-form
     :model="FormData"
     ref="FormData"
     label-width="120px"
@@ -13,7 +15,7 @@
           prop="Account"
         >
           <el-input
-            :size="inputSize"
+            :size="Size"
             v-model="FormData.Account"
           ></el-input>
         </el-form-item>
@@ -30,7 +32,7 @@
           prop="Phone"
         >
           <el-input
-            :size="inputSize"
+            :size="Size"
             v-model="FormData.Phone"
           ></el-input>
         </el-form-item>
@@ -41,14 +43,16 @@
           prop="MessageCode"
         >
           <el-input
-            :size="inputSize"
+            :size="Size"
             v-model="FormData.MessageCode"
           ></el-input>
 
         </el-form-item>
       </el-col>
       <el-col :span="4">
-        <CButton></CButton>
+        <CButton
+          :Time="5"
+        ></CButton>
       </el-col>
     </el-row>
 
@@ -59,7 +63,7 @@
           prop="PWD"
         >
           <el-input
-            :size="inputSize"
+            :size="Size"
             v-model="FormData.PWD"
           ></el-input>
         </el-form-item>
@@ -74,6 +78,9 @@
       <el-button>取消</el-button>
     </el-form-item>
   </el-form>
+     </slot>
+</div>
+ 
 
 </template>
 
@@ -101,11 +108,8 @@ export default class Forget extends Vue {
     MessageCode: ERules.MessageCode,
     PWD: ERules.PWD
   };
-  inputSize: string = "small";
-
-  // 741852
-  // asd456   123
-
+  @Prop({default:'small'})
+  Size?: string ;
   /**
    * 找回密码
    */
