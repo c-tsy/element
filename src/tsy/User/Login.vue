@@ -14,7 +14,7 @@
           prop="Account"
         >
           <el-input
-            :size="inputSize"
+            :size="Size"
             v-model="FormData.Account"
           ></el-input>
         </el-form-item>
@@ -29,7 +29,7 @@
             prop="Phone"
           >
             <el-input
-              :size="inputSize"
+              :size="Size"
               v-model="FormData.Phone"
             ></el-input>
           </el-form-item>
@@ -40,7 +40,7 @@
             prop="PhoneCode"
           >
             <el-input
-              :size="inputSize"
+              :size="Size"
               v-model="FormData.PhoneCode"
             ></el-input>
 
@@ -49,7 +49,7 @@
         <el-col :span="4">
           <el-button
             type="success"
-            :size="inputSize"
+            :size="Size"
             key="Phone"
             style="margin-left:10px"
             @click="GetCode('Phone')"
@@ -67,7 +67,7 @@
           >
             <el-input
               v-model="FormData.Email"
-              :size="inputSize"
+              :size="Size"
             ></el-input>
 
           </el-form-item>
@@ -79,7 +79,7 @@
           >
             <el-input
               v-model="FormData.EmailCode"
-              :size="inputSize"
+              :size="Size"
             ></el-input>
           </el-form-item>
         </el-col>
@@ -104,7 +104,7 @@
           prop="PWD"
         >
           <el-input
-            :size="inputSize"
+            :size="Size"
             type="password"
             v-model="FormData.PWD"
           ></el-input>
@@ -116,9 +116,9 @@
       <el-button
         type="primary"
         @click="Login('FormData')"
-        :size="inputSize"
+        :size="Size"
       >登录</el-button>
-      <el-button :size="inputSize">取消</el-button>
+      <el-button :size="Size">取消</el-button>
     </el-form-item>
   </el-form>
 
@@ -143,7 +143,7 @@ export default class Login extends Vue {
     PWD: ""
   };
   @Prop({ default: "small" })
-  inputSize?: string;
+  Size?: string;
 
   /**
    * 登录
