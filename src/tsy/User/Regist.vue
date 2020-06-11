@@ -64,7 +64,7 @@
                 v-model="Register.Account"
               ></el-input>
             </el-form-item>
-
+          </el-col>
         </el-row>
         <el-row v-if="registerProps['IsPhone']">
 
@@ -211,12 +211,14 @@ export default class UserRister extends Vue {
    * IsEmail
    *
    */
-  @Prop({ default: () => {} }) //是否需要显示
-  registerProps: { [index: string]: any } = {
-    Avatar: false,
-    IsPhone: true,
-    IsEmail: false
-  };
+  @Prop({
+    default: () => ({
+      Avatar: false,
+      IsPhone: true,
+      IsEmail: false
+    })
+  }) //是否需要显示
+  registerProps?: { [index: string]: boolean };
 
   imageUrl: string = "";
 
