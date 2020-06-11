@@ -2,10 +2,11 @@
   <div>
     <el-dialog
       title=""
-      :visible.sync="visible"
+      :visible.sync="show"
       width="60%"
       :show-close="false"
       :close-on-click-modal="false"
+      :close-on-press-escape="false"
     >
 
       <el-tabs
@@ -16,7 +17,10 @@
           label="登录"
           name="login"
         >
-          <CtsyLogin key="login"></CtsyLogin>
+          <CtsyLogin
+            @cancel="IsVisible"
+            key="login"
+          ></CtsyLogin>
 
         </el-tab-pane>
         <el-tab-pane
@@ -24,7 +28,6 @@
           name="register"
         >
           <CtsyRegister
-            :registerProps="show"
             key="forget"
             @code="getcode"
             :CodeTimeOut="10"
@@ -51,21 +54,25 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component
-export default class Name extends Vue {
-  @Prop({ default: true })
+export default class UserModeule extends Vue {
+  @Prop({ default: false })
   visible?: boolean;
 
   activeName: string = "login";
 
-  show: any = {
-    Avatar: false,
-    IsPhone: true,
-    IsEmail: true
-  };
-
   getcode(v: any) {
     console.log(v);
   }
+  IsVisible(v: boolean) {
+    this.visible = v;
+  }
+  get show() {
+    return !!this.visible;
+  }
+  set show(v) {
+    this.$emit("input", v);
+  }
+
   handleClick() {}
 }
 </script>
