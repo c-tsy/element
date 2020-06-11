@@ -3,7 +3,7 @@
   <div>
     <el-button
       :type="type||'success'"
-      :size="inputSize || 'small' "
+      :size="Size || 'small' "
       style="margin-left:10px"
       @click="ClickButton"
       :disabled="disabled||DefaultDisabked"
@@ -23,7 +23,7 @@ import { timeout } from "@ctsy/common";
 @Component
 export default class Name extends Vue {
   @Prop({ default: "small" })
-  inputSize?: string;
+  Size?: string;
   @Prop({ default: "success" })
   type?: string;
   @Prop({ default: false })
