@@ -130,7 +130,7 @@ import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 // import CustomValidate from "@/lib/Reg/regFun";
 import ElementFormRules from "@/lib/ElementFormRules/index";
 
-const ERules = new ElementFormRules.defalultRules();
+const ERules = ElementFormRules.defalultRules;
 
 @Component({})
 export default class Login extends Vue {
