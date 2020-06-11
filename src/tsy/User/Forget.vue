@@ -20,6 +20,9 @@
       </el-col>
     </el-row>
 
+    <slot name="email">
+    </slot>
+
     <el-row>
       <el-col :span="8">
         <el-form-item
@@ -77,7 +80,7 @@
 <script lang="ts">
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 import ElementFormRules from "@/lib/ElementFormRules/index";
-const ERules = new ElementFormRules.defalultRules();
+const ERules = ElementFormRules.defalultRules;
 import CButton from "../Base/TimeOutButton.vue";
 
 @Component({
@@ -115,6 +118,7 @@ export default class Forget extends Vue {
       }
       try {
         let rs = await this.$store.dispatch("get_user_forget", this.FormData);
+        this.$message.success("设置成功");
       } catch (error) {
         this.$message.error(error.message);
       }
