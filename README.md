@@ -76,6 +76,7 @@ Props:{
 }
 
 emit:{
+    cancel:返回 fasle 隐藏dialog
 success:找回密码成功之后的回调
 error:找回密码失败之后的回调
 }
@@ -94,10 +95,12 @@ prop:{
 }
 
 emit:{
+    cancel:返回 fasle 隐藏dialog
     success:登录成功之后的回调 返回登录成功之后的信息
     error:登录失败之后的回调
 }
 
+<CtsyLogin></CtsyLogin>
 ```
 
 ### 注册组件-全局组件
@@ -122,10 +125,25 @@ registerProps:{  //是否显示头像上传 电话号码验证 邮箱验证
 }
 
 emit:{
+    cancel:返回 fasle 隐藏dialog
     success:注册成功之后的回调 ,
   error:注册失败后的回调
 }
+<CtsyRegister></CtsyRegister>
 
+
+```
+
+### 集成 login,register,forget 组件
+
+```
+    props:{
+        visible:是否显示dialog
+    }
+
+    emit{
+        input:返回dialog viseble 状态
+    }
 
 
 ```
