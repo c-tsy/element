@@ -134,7 +134,7 @@ emit:{
 
 ```
 
-### 集成 login,register,forget 组件
+### 集成 login,register,forget 组件 -全局组件
 
 ```
     props:{
