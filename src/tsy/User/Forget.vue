@@ -102,6 +102,7 @@ export default class Forget extends Vue {
     MessageCode: "",
     VCode: ""
   };
+
   Rules: object = {
     Account: ERules.Account,
     Phone: ERules.Phone,
@@ -123,8 +124,10 @@ export default class Forget extends Vue {
       try {
         let rs = await this.$store.dispatch("get_user_forget", this.FormData);
         this.$message.success("设置成功");
+        this.$emit('success')
       } catch (error) {
         this.$message.error(error.message);
+        this.$emit('error') 
       }
     });
   }
