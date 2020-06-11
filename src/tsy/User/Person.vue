@@ -40,13 +40,13 @@
                 class="textProp"
                 v-if="v.prop === 'Sex'"
               >
-                {{Sex[data[v.prop]]}}
+                {{v.prop | Sex}}
               </span>
               <span
                 class="textProp"
                 v-else-if="v.prop === 'Status'"
               >
-                {{Status[data[v.prop]]}}
+                {{v.prop|Status}}
               </span>
               <span
                 class="textProp"
