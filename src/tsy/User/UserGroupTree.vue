@@ -33,9 +33,9 @@
             v-if="data.UGID!=0"
             type="text"
             size="mini"
+            icon="el-icon-edit"
             @click.stop="opGroup(data,node,'edit')"
           >
-            <i class="el-icon-edit"></i>
           </el-button>
           <!-- <el-button
               v-if="data.UGID!=0"
@@ -48,6 +48,7 @@
         </span>
       </span>
     </el-tree>
+
     <Dialog
       @ok="accept"
       v-model="ShowDialog"
