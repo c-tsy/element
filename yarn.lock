@@ -822,7 +822,7 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@ctsy/api-sdk@^2.0.138", "@ctsy/api-sdk@^2.0.140":
+"@ctsy/api-sdk@^2.0.138":
   version "2.0.140"
   resolved "https://registry.yarnpkg.com/@ctsy/api-sdk/-/api-sdk-2.0.140.tgz#0c15899b8849928bb7af397accb4f08e9193b0cb"
   integrity sha512-tARl59+wB+uy91WiPQRM/5R9BZIWFZn1doOtsdAUFHi5gDEjj5pa02n2LJIlW9DTdgZgKgXYJz4gnlsDk0XRDw==
@@ -836,6 +836,26 @@
     protobufjs "^6.9.0"
     set-value "*"
     store "*"
+
+"@ctsy/api-sdk@^2.0.147":
+  version "2.0.147"
+  resolved "https://registry.yarnpkg.com/@ctsy/api-sdk/-/api-sdk-2.0.147.tgz#3f1437578ad8575a03a4a5b6b70f0718a0c38934"
+  integrity sha512-lI6Ma309Z8bv8JUb98SVRxN/v1NMbUZXa2T7wwzowL2qY9yiSxzgXKghRaTaSGz8rA10TClnSMfk2SeClAsQfQ==
+  dependencies:
+    "@ctsy/covert" "*"
+    "@ctsy/hook" "*"
+    "@ctsy/ws-rpc-client" "^1.0.13"
+    castle-function "*"
+    get-value "*"
+    md5 "*"
+    protobufjs "^6.9.0"
+    set-value "*"
+    store "*"
+
+"@ctsy/common@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@ctsy/common/-/common-1.0.1.tgz#2ed57e6dba03b25f106405113460c6f1a17e3a00"
+  integrity sha512-yVJsMORg6l52b8M8IykFikdm7WJz8sTK1Lhmk1tpyiJ0fLehinvZjDdRhmOOOI4LVCbHSghPUgG1NhqF0AAV/g==
 
 "@ctsy/covert@*":
   version "1.0.1"

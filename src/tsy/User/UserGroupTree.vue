@@ -6,27 +6,36 @@
       @node-click="UserGroupClick"
       :props="{label:'Title'}"
     >
-      <span class="custom-tree-node" slot-scope="{ node, data }">
+      <span
+        class="custom-tree-node"
+        slot-scope="{ node, data }"
+      >
         <span>{{ node.label }}</span>
         <span>
-          <el-button type="text" size="medium" @click.stop="addGroup(data,node,'add')">
-            <i class="el-icon-plus"></i>
+          <el-button
+            type="text"
+            icon="el-icon-plus"
+            size="medium"
+            @click.stop="addGroup(data,node,'add')"
+          >
+
           </el-button>
           <el-button
             v-if="data.UGID!=0"
             type="text"
             size="medium"
+            icon="el-icon-minus"
             @click.stop="opGroup(data,node,'del')"
           >
-            <i class="el-icon-minus"></i>
           </el-button>
+
           <el-button
             v-if="data.UGID!=0"
             type="text"
             size="mini"
+            icon="el-icon-edit"
             @click.stop="opGroup(data,node,'edit')"
           >
-            <i class="el-icon-edit"></i>
           </el-button>
           <!-- <el-button
               v-if="data.UGID!=0"
@@ -39,7 +48,14 @@
         </span>
       </span>
     </el-tree>
-    <Dialog @ok="accept" v-model="ShowDialog" title="请输入用户组名称" label="用户组名称" :more="true"></Dialog>
+
+    <Dialog
+      @ok="accept"
+      v-model="ShowDialog"
+      title="请输入用户组名称"
+      label="用户组名称"
+      :more="true"
+    ></Dialog>
   </div>
 </template>
 

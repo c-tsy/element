@@ -1,24 +1,34 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import * as ElementUI from 'element-ui'
-import Ctsy from './index'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import * as ElementUI from "element-ui";
+import Ctsy from "./index";
 
-import { ApiConfig } from '@ctsy/api-sdk'
+import * as filters from "@/filters";
 
-ApiConfig.AppID = 'dev';
-ApiConfig.Secret = 'dev2930sf9fwopfwe9';
-ApiConfig.Key = 'dev';
+import { ApiConfig } from "@ctsy/api-sdk";
 
-Vue.use(ElementUI)
+import User from "@ctsy/api-sdk/dist/modules/User";
 
-Vue.use(Ctsy)
+// User.Sex;
+
+// ApiConfig.AppID = "dev";
+// ApiConfig.Secret = "dev2930sf9fwopfwe9";
+// ApiConfig.Key = "dev";
+
+Vue.use(ElementUI);
+
+Vue.use(Ctsy);
 
 Vue.config.productionTip = false;
+
+Object.keys(filters).forEach((e: any) => {
+  Vue.filter(e, (filters as { [key: string]: Function })[e]);
+});
 
 new Vue({
   router,
   store,
   render: (h) => h(App),
-}).$mount('#app');
+}).$mount("#app");
