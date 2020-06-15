@@ -1,6 +1,6 @@
 {
   "name": "@ctsy/element",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "src/index.ts",
   "files": [
     "src/index.ts",
@@ -15,7 +15,7 @@
     "build-bundle": "vue-cli-service build --target lib --name ctsy ./src/index.ts"
   },
   "dependencies": {
-    "@ctsy/api-sdk": "^2.0.147",
+    "@ctsy/api-sdk": "^2.0.166",
     "@ctsy/common": "^1.0.1",
     "@ctsy/vuex": "^3.0.0",
     "axios": "^0.19.2",
