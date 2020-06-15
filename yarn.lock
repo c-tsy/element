@@ -837,14 +837,15 @@
     set-value "*"
     store "*"
 
-"@ctsy/api-sdk@^2.0.147":
-  version "2.0.147"
-  resolved "https://registry.yarnpkg.com/@ctsy/api-sdk/-/api-sdk-2.0.147.tgz#3f1437578ad8575a03a4a5b6b70f0718a0c38934"
-  integrity sha512-lI6Ma309Z8bv8JUb98SVRxN/v1NMbUZXa2T7wwzowL2qY9yiSxzgXKghRaTaSGz8rA10TClnSMfk2SeClAsQfQ==
+"@ctsy/api-sdk@^2.0.166":
+  version "2.0.166"
+  resolved "https://registry.yarnpkg.com/@ctsy/api-sdk/-/api-sdk-2.0.166.tgz#07ae98c0ddebe0be05c2ac537f575f453705f3a9"
+  integrity sha512-KnSruH1/aYttChpnxLdBs19uNNTMbXgetiLGy9omhpy31hCaSkPRD+5aoG060jUhtZGw2nd5GMV7yJV+ytEYRQ==
   dependencies:
     "@ctsy/covert" "*"
     "@ctsy/hook" "*"
     "@ctsy/ws-rpc-client" "^1.0.13"
+    axios "^0.19.2"
     castle-function "*"
     get-value "*"
     md5 "*"
