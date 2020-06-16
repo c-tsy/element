@@ -1,10 +1,12 @@
 {
   "name": "@ctsy/element",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "src/index.ts",
   "files": [
     "src/index.ts",
     "src/tsy/**/*",
+    "src/assets",
+    "src/lib",
     "README.md",
     "yarn.lock"
   ],
