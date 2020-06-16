@@ -1,129 +1,59 @@
 <template>
   <div>
-
     <slot>
-      <el-form
-        :model="Register"
-        ref="Register"
-        label-width="120px"
-        size="small"
-        :rules="Rules"
-      >
+      <el-form :model="Register" ref="Register" label-width="120px" size="small" :rules="Rules">
         <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
-        <slot name='avatar'>
-          <el-form-item
-            label="头像"
-            v-if="registerProps['Avatar']"
-          >
-            <img
-              :src="URL"
-              class="avatar-uploader  avatar"
-              @click="chooseImg"
-            >
+        <slot name="avatar">
+          <el-form-item label="头像" v-if="registerProps['Avatar']">
+            <img :src="URL" class="avatar-uploader avatar" @click="chooseImg" />
           </el-form-item>
         </slot>
 
         <el-row>
           <el-col :span="12">
-
-            <el-form-item
-              label="姓名"
-              prop="Name"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.Name"
-              ></el-input>
+            <el-form-item label="姓名" prop="Name">
+              <el-input :size="Size" v-model="Register.Name"></el-input>
             </el-form-item>
-
           </el-col>
           <el-col :span="12">
-
-            <el-form-item
-              label="昵称"
-              prop="NickName"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.NickName"
-              ></el-input>
+            <el-form-item label="昵称" prop="NickName">
+              <el-input :size="Size" v-model="Register.NickName"></el-input>
             </el-form-item>
-
           </el-col>
         </el-row>
 
         <el-row>
           <el-col :span="8">
-
-            <el-form-item
-              label="账号"
-              prop="Account"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.Account"
-              ></el-input>
+            <el-form-item label="账号" prop="Account">
+              <el-input :size="Size" v-model="Register.Account"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row v-if="registerProps['IsPhone']">
-
           <el-col :span="8">
-            <el-form-item
-              label="手机号码"
-              prop="Phone"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.Phone"
-              ></el-input>
+            <el-form-item label="手机号码" prop="Phone">
+              <el-input :size="Size" v-model="Register.Phone"></el-input>
             </el-form-item>
-
           </el-col>
           <el-col :span="6">
-
-            <el-form-item
-              label="短信验证码"
-              prop="MessageCode"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.PhoneCode"
-              ></el-input>
-
+            <el-form-item label="短信验证码" prop="MessageCode">
+              <el-input :size="Size" v-model="Register.PhoneCode"></el-input>
             </el-form-item>
-
           </el-col>
           <el-col :span="4">
             <CButton :Time="0"></CButton>
           </el-col>
-
         </el-row>
 
         <el-row v-if="registerProps['IsEmail']">
-
           <el-col :span="8">
-            <el-form-item
-              label="邮箱"
-              prop="Email"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.Email"
-              ></el-input>
-
+            <el-form-item label="邮箱" prop="Email">
+              <el-input :size="Size" v-model="Register.Email"></el-input>
             </el-form-item>
-
           </el-col>
           <el-col :span="6">
-            <el-form-item
-              label="邮箱验证码"
-              prop="EmailCode"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.EmailCode"
-              ></el-input>
+            <el-form-item label="邮箱验证码" prop="EmailCode">
+              <el-input :size="Size" v-model="Register.EmailCode"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
@@ -133,62 +63,37 @@
 
         <el-row>
           <el-col :span="8">
-
-            <el-form-item
-              label="密码"
-              prop="PWD"
-            >
-              <el-input
-                type="password"
-                :size="Size"
-                v-model="Register.PWD"
-              ></el-input>
+            <el-form-item label="密码" prop="PWD">
+              <el-input type="password" :size="Size" v-model="Register.PWD"></el-input>
             </el-form-item>
-
           </el-col>
         </el-row>
 
         <el-row>
           <el-col :span="8">
-
-            <el-form-item
-              label="确认密码"
-              prop="RPWD"
-            >
-              <el-input
-                type="password"
-                :size="Size"
-                v-model="Register.RPWD"
-              ></el-input>
+            <el-form-item label="确认密码" prop="RPWD">
+              <el-input type="password" :size="Size" v-model="Register.RPWD"></el-input>
             </el-form-item>
-
           </el-col>
         </el-row>
 
         <el-form-item>
           <slot name="button">
-            <el-button
-              type="primary"
-              @click="SubmitRegister('Register')"
-            >注册</el-button>
+            <el-button type="primary" @click="SubmitRegister('Register')">注册</el-button>
             <el-button @click="Cancel">返回</el-button>
           </slot>
-
         </el-form-item>
-
       </el-form>
     </slot>
-
   </div>
-
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 
 import Upload from "@ctsy/api-sdk/dist/modules/Upload";
-import CustomValidate from "@/lib/Reg/regFun";
-import ElementFormRules from "@/lib/ElementFormRules/index";
+import CustomValidate from "../../lib/Reg/regFun";
+import ElementFormRules from "../../lib/ElementFormRules/index";
 const ERules = ElementFormRules.defalultRules;
 
 import CButton from "../Base/TimeOutButton.vue";
@@ -287,7 +192,7 @@ export default class UserRister extends Vue {
     });
   }
 
-  URL: string = require("@/assets/add.png");
+  URL: string = require("../../assets/add.png");
   File?: File;
 
   async chooseImg() {

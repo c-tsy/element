@@ -1,4 +1,4 @@
-import CustomValidate from "@/lib/Reg/regFun";
+import CustomValidate from "../../lib/Reg/regFun";
 
 namespace ElementFromRules {
   /**

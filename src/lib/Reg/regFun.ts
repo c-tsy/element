@@ -1,5 +1,3 @@
-// import PublicReg from "@/lib/Reg";
-
 import PublicReg from "@ctsy/vuex/dist/RegExp/index";
 
 const Regs = new PublicReg.Regs();

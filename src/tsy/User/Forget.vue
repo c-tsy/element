@@ -1,52 +1,26 @@
 <template>
   <div>
     <slot>
-      <el-form
-        :model="FormData"
-        ref="FormData"
-        label-width="120px"
-        size="small"
-        :rules="Rules"
-      >
+      <el-form :model="FormData" ref="FormData" label-width="120px" size="small" :rules="Rules">
         <el-row>
           <el-col :span="12">
-            <el-form-item
-              label="账号"
-              prop="Account"
-            >
-              <el-input
-                :size="Size"
-                v-model="FormData.Account"
-              ></el-input>
+            <el-form-item label="账号" prop="Account">
+              <el-input :size="Size" v-model="FormData.Account"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
 
-        <slot name="email">
-        </slot>
+        <slot name="email"></slot>
 
         <el-row>
           <el-col :span="8">
-            <el-form-item
-              label="手机号码"
-              prop="Phone"
-            >
-              <el-input
-                :size="Size"
-                v-model="FormData.Phone"
-              ></el-input>
+            <el-form-item label="手机号码" prop="Phone">
+              <el-input :size="Size" v-model="FormData.Phone"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item
-              label="验证码"
-              prop="MessageCode"
-            >
-              <el-input
-                :size="Size"
-                v-model="FormData.MessageCode"
-              ></el-input>
-
+            <el-form-item label="验证码" prop="MessageCode">
+              <el-input :size="Size" v-model="FormData.MessageCode"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
@@ -56,34 +30,24 @@
 
         <el-row>
           <el-col :span="12">
-            <el-form-item
-              label="新密码"
-              prop="PWD"
-            >
-              <el-input
-                :size="Size"
-                v-model="FormData.PWD"
-              ></el-input>
+            <el-form-item label="新密码" prop="PWD">
+              <el-input :size="Size" v-model="FormData.PWD"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12"></el-col>
         </el-row>
         <el-form-item>
-          <el-button
-            type="primary"
-            @click="ForGet('FormData')"
-          >设置</el-button>
+          <el-button type="primary" @click="ForGet('FormData')">设置</el-button>
           <el-button @click="Cancel">取消</el-button>
         </el-form-item>
       </el-form>
     </slot>
   </div>
-
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
-import ElementFormRules from "@/lib/ElementFormRules/index";
+import ElementFormRules from "../../lib/ElementFormRules/index";
 const ERules = ElementFormRules.defalultRules;
 import CButton from "../Base/TimeOutButton.vue";
 

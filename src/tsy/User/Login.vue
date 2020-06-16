@@ -2,22 +2,11 @@
   <!-- <el-dialog :visible.sync="show"> -->
   <!-- 账号/密码/验证码 -->
 
-  <el-form
-    :model="FormData"
-    ref="FormData"
-    label-width="80px"
-    :rules="Rules"
-  >
+  <el-form :model="FormData" ref="FormData" label-width="80px" :rules="Rules">
     <el-row>
       <el-col :span="12">
-        <el-form-item
-          label="账号"
-          prop="Account"
-        >
-          <el-input
-            :size="Size"
-            v-model="FormData.Account"
-          ></el-input>
+        <el-form-item label="账号" prop="Account">
+          <el-input :size="Size" v-model="FormData.Account"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12"></el-col>
@@ -58,7 +47,7 @@
             获取验证码
           </el-button>
         </el-col>
-      </el-row> -->
+    </el-row>-->
 
     <!-- <el-row>
         <el-col :span="8">
@@ -96,33 +85,19 @@
           </el-button>
         </el-col>
 
-      </el-row> -->
+    </el-row>-->
 
     <el-row>
       <el-col :span="8">
-        <el-form-item
-          label="密码"
-          prop="PWD"
-        >
-          <el-input
-            :size="Size"
-            type="password"
-            v-model="FormData.PWD"
-          ></el-input>
+        <el-form-item label="密码" prop="PWD">
+          <el-input :size="Size" type="password" v-model="FormData.PWD"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
 
     <el-form-item>
-      <el-button
-        type="primary"
-        @click="Login('FormData')"
-        :size="Size"
-      >登录</el-button>
-      <el-button
-        :size="Size"
-        @click="Cancel"
-      >取消</el-button>
+      <el-button type="primary" @click="Login('FormData')" :size="Size">登录</el-button>
+      <el-button :size="Size" @click="Cancel">取消</el-button>
     </el-form-item>
   </el-form>
 
@@ -131,8 +106,7 @@
 
 <script lang="ts">
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
-// import CustomValidate from "@/lib/Reg/regFun";
-import ElementFormRules from "@/lib/ElementFormRules/index";
+import ElementFormRules from "../../lib/ElementFormRules/index";
 
 const ERules = ElementFormRules.defalultRules;
 

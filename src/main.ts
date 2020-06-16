@@ -5,7 +5,7 @@ import store from "./store";
 import * as ElementUI from "element-ui";
 import Ctsy from "./index";
 
-import * as filters from "@/filters";
+import * as filters from "./filters";
 
 import { ApiConfig } from "@ctsy/api-sdk";
 
