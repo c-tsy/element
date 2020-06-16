@@ -1,18 +1,30 @@
 <template>
   <!-- <el-dialog :visible.sync="show"> -->
   <!-- 账号/密码/验证码 -->
+  <div class="container" :style="{backgroundImage:'url('+EnterpriseInfo.Url+') '}">
+    <el-form :model="FormData" ref="FormData" label-width="80px" :rules="Rules">
+      <el-row style="padding-top:150px">
+        <el-row style="margin:20px 0">
+          <el-col :span="7" :offset="9" class="title">{{EnterpriseInfo.Title}}</el-col>
+        </el-row>
+        <el-col :span="6" :offset="9">
+          <el-form-item label="账号" prop="Account">
+            <el-input :size="Size" v-model="FormData.Account"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="PWD">
+            <el-input :size="Size" type="password" v-model="FormData.PWD"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-col :span="24" class="btns">
+              <el-button type="primary" @click="Login('FormData')" style="width:100%">登录</el-button>
+              <el-button style="width:100%" @click="Cancel">取消</el-button>
+            </el-col>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8" :offset="8"></el-col>
+      </el-row>
 
-  <el-form :model="FormData" ref="FormData" label-width="80px" :rules="Rules">
-    <el-row>
-      <el-col :span="12">
-        <el-form-item label="账号" prop="Account">
-          <el-input :size="Size" v-model="FormData.Account"></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="12"></el-col>
-    </el-row>
-
-    <!-- <el-row>
+      <!-- <el-row>
         <el-col :span="8">
           <el-form-item
             label="手机号码"
@@ -47,9 +59,9 @@
             获取验证码
           </el-button>
         </el-col>
-    </el-row>-->
+      </el-row>-->
 
-    <!-- <el-row>
+      <!-- <el-row>
         <el-col :span="8">
           <el-form-item
             label="邮箱"
@@ -85,21 +97,9 @@
           </el-button>
         </el-col>
 
-    </el-row>-->
-
-    <el-row>
-      <el-col :span="8">
-        <el-form-item label="密码" prop="PWD">
-          <el-input :size="Size" type="password" v-model="FormData.PWD"></el-input>
-        </el-form-item>
-      </el-col>
-    </el-row>
-
-    <el-form-item>
-      <el-button type="primary" @click="Login('FormData')" :size="Size">登录</el-button>
-      <el-button :size="Size" @click="Cancel">取消</el-button>
-    </el-form-item>
-  </el-form>
+      </el-row>-->
+    </el-form>
+  </div>
 
   <!-- </el-dialog> -->
 </template>
@@ -120,6 +120,14 @@ export default class Login extends Vue {
     // EmailCode: "",
     PWD: ""
   };
+  @Prop({
+    default: {
+      Title: "默认企业",
+      Url:
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592316570565&di=b7924104dc18fb5d7a0bce015e215c45&imgtype=0&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1471962588%2C782021995%26fm%3D214%26gp%3D0.jpg"
+    }
+  })
+  EnterpriseInfo!: any;
   @Prop({ default: "small" })
   Size?: string;
 
@@ -160,6 +168,25 @@ export default class Login extends Vue {
   };
 }
 </script>
-
+<style lang="less">
+.el-form-item__label {
+  color: #fff;
+}
+</style>
 <style lang="less" scoped>
+.btns {
+  display: flex;
+  justify-content: space-between;
+}
+.title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 600;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-size: 100% 100%;
+  color: #fff;
+}
 </style>
