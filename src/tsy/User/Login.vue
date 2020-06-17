@@ -135,21 +135,22 @@ export default class Login extends Vue {
    * 登录
    */
   async Login(FromName: any) {
-    let refs: any = this.$refs[FromName];
-    refs.validate(async (valid: any) => {
-      if (!valid) {
-        this.$message.error("请完善登录信息");
-        return false;
-      }
-      try {
-        let rs = await this.$store.dispatch("get_user_login", this.FormData);
-        this.$message.success("登录成功");
-        this.$emit("success", rs);
-      } catch (e) {
-        this.$message.error(e.message);
-        this.$emit("error", "error");
-      }
-    });
+    // let refs: any = this.$refs[FromName];
+    // refs.validate(async (valid: any) => {
+    //   if (!valid) {
+    //     this.$message.error("请完善登录信息");
+    //     return false;
+    //   }
+    //     });
+    try {
+      // console.log(this.$store);
+      // let rs = await this.$store.dispatch("get_user_login", this.FormData);
+      this.$emit("login", this.FormData);
+      // this.$message.success("登录成功");
+    } catch (e) {
+      // this.$message.error(e.message);
+      this.$emit("login");
+    }
   }
 
   /**

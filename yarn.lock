@@ -822,21 +822,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@ctsy/api-sdk@^2.0.138":
-  version "2.0.140"
-  resolved "https://registry.yarnpkg.com/@ctsy/api-sdk/-/api-sdk-2.0.140.tgz#0c15899b8849928bb7af397accb4f08e9193b0cb"
-  integrity sha512-tARl59+wB+uy91WiPQRM/5R9BZIWFZn1doOtsdAUFHi5gDEjj5pa02n2LJIlW9DTdgZgKgXYJz4gnlsDk0XRDw==
-  dependencies:
-    "@ctsy/covert" "*"
-    "@ctsy/hook" "*"
-    "@ctsy/ws-rpc-client" "^1.0.13"
-    castle-function "*"
-    get-value "*"
-    md5 "*"
-    protobufjs "^6.9.0"
-    set-value "*"
-    store "*"
-
 "@ctsy/api-sdk@^2.0.166":
   version "2.0.166"
   resolved "https://registry.yarnpkg.com/@ctsy/api-sdk/-/api-sdk-2.0.166.tgz#07ae98c0ddebe0be05c2ac537f575f453705f3a9"
@@ -883,12 +868,12 @@
   dependencies:
     buffer "^5.2.1"
 
-"@ctsy/vuex@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@ctsy/vuex/-/vuex-3.0.0.tgz#19fec8c64ce8c1926718399eee33e0ae74b4dd56"
-  integrity sha512-mZAMqxncSMaz962P4NdsqHbqxgT/DAYA3z3noCzFIRuHLw1QAHSgWb3smh2BWQ/qfA//mxQ13O0HqCcz503dQw==
+"@ctsy/vuex@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@ctsy/vuex/-/vuex-3.0.2.tgz#6c68f3371473c48f4f75266a6b70fe444136b199"
+  integrity sha512-i7oHihy1r2clX+2pK0NcYUodz6MuyJ+FTXDfy9bRb18Q5ixvI1Rgptj2Vbj0dyGLXTXKN7OSq3b/h0CPu93RgQ==
   dependencies:
-    "@ctsy/api-sdk" "^2.0.138"
+    "@ctsy/api-sdk" "^2.0.166"
     "@ctsy/hook" "^0.0.6"
     castle-function "^1.0.3"
     vue "^2.6"
