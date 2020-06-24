@@ -5,178 +5,144 @@
       <el-form
         :model="Register"
         ref="Register"
-        label-width="120px"
-        size="small"
+        label-width="auto"
+        hide-required-asterisk
+        label-position="left"
         :rules="Rules"
       >
         <!-- 头像 上传  根据传入的参数进行头像是否需要上传 -->
-        <slot name='avatar'>
-          <el-form-item
-            label="头像"
-            v-if="registerProps['Avatar']"
+        <div class="Ctsy_uploader_avatar_container">
+          <img
+            :src="URL"
+            class="avatar-uploader  avatar"
+            @click="chooseImg"
+            alt="头像上传"
           >
-            <img
-              :src="URL"
-              class="avatar-uploader  avatar"
-              @click="chooseImg"
-            >
+        </div>
+
+        <!-- <slot name='avatar'>
+          <el-form-item label="头像">
+           
           </el-form-item>
-        </slot>
+        </slot> -->
 
-        <el-row>
-          <el-col :span="12">
+        <el-form-item
+          label="姓名"
+          prop="Name"
+          class="Ctsy_Form_item"
+        >
+          <el-input
+            :size="Size"
+            v-model="Register.Name"
+          ></el-input>
+        </el-form-item>
 
-            <el-form-item
-              label="姓名"
-              prop="Name"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.Name"
-              ></el-input>
-            </el-form-item>
+        <el-form-item
+          label="昵称"
+          prop="NickName"
+          class="Ctsy_Form_item"
+        >
+          <el-input
+            :size="Size"
+            v-model="Register.NickName"
+          ></el-input>
+        </el-form-item>
 
-          </el-col>
-          <el-col :span="12">
+        <el-form-item
+          label="账号"
+          prop="Account"
+          class="Ctsy_Form_item"
+        >
+          <el-input
+            :size="Size"
+            v-model="Register.Account"
+          ></el-input>
+        </el-form-item>
 
-            <el-form-item
-              label="昵称"
-              prop="NickName"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.NickName"
-              ></el-input>
-            </el-form-item>
+        <el-form-item
+          label="手机号码"
+          prop="Phone"
+          class="Ctsy_Form_item"
+        >
+          <el-input
+            :size="Size"
+            v-model="Register.Phone"
+          ></el-input>
+        </el-form-item>
 
-          </el-col>
-        </el-row>
-
-        <el-row>
-          <el-col :span="8">
-
-            <el-form-item
-              label="账号"
-              prop="Account"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.Account"
-              ></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row v-if="registerProps['IsPhone']">
-
-          <el-col :span="8">
-            <el-form-item
-              label="手机号码"
-              prop="Phone"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.Phone"
-              ></el-input>
-            </el-form-item>
-
-          </el-col>
-          <el-col :span="6">
-
-            <el-form-item
-              label="短信验证码"
-              prop="MessageCode"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.PhoneCode"
-              ></el-input>
-
-            </el-form-item>
-
-          </el-col>
-          <el-col :span="4">
+        <el-form-item
+          label="短信验证码"
+          prop="MessageCode"
+          class="Ctsy_Form_item"
+        >
+          <span class="Ctsy_Form_item_button">
+            <el-input
+              :size="Size"
+              v-model="Register.PhoneCode"
+            ></el-input>
             <CButton :Time="0"></CButton>
-          </el-col>
-
-        </el-row>
-
-        <el-row v-if="registerProps['IsEmail']">
-
-          <el-col :span="8">
-            <el-form-item
-              label="邮箱"
-              prop="Email"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.Email"
-              ></el-input>
-
-            </el-form-item>
-
-          </el-col>
-          <el-col :span="6">
-            <el-form-item
-              label="邮箱验证码"
-              prop="EmailCode"
-            >
-              <el-input
-                :size="Size"
-                v-model="Register.EmailCode"
-              ></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="4">
-            <CButton :Time="20"></CButton>
-          </el-col>
-        </el-row>
-
-        <el-row>
-          <el-col :span="8">
-
-            <el-form-item
-              label="密码"
-              prop="PWD"
-            >
-              <el-input
-                type="password"
-                :size="Size"
-                v-model="Register.PWD"
-              ></el-input>
-            </el-form-item>
-
-          </el-col>
-        </el-row>
-
-        <el-row>
-          <el-col :span="8">
-
-            <el-form-item
-              label="确认密码"
-              prop="RPWD"
-            >
-              <el-input
-                type="password"
-                :size="Size"
-                v-model="Register.RPWD"
-              ></el-input>
-            </el-form-item>
-
-          </el-col>
-        </el-row>
-
-        <el-form-item>
-          <slot name="button">
-            <el-button
-              type="primary"
-              @click="SubmitRegister('Register')"
-            >注册</el-button>
-            <el-button @click="Cancel">返回</el-button>
-          </slot>
+          </span>
 
         </el-form-item>
 
+        <el-form-item
+          label="邮箱"
+          prop="Email"
+          class="Ctsy_Form_item"
+        >
+          <el-input
+            :size="Size"
+            v-model="Register.Email"
+          ></el-input>
+
+        </el-form-item>
+
+        <el-form-item
+          label="邮箱验证码"
+          prop="EmailCode"
+          class="Ctsy_Form_item"
+        >
+          <span class="Ctsy_Form_item_button">
+            <el-input
+              :size="Size"
+              v-model="Register.EmailCode"
+            ></el-input>
+            <CButton :Time="20"></CButton>
+          </span>
+
+        </el-form-item>
+
+        <el-form-item
+          label="密码"
+          prop="PWD"
+          class="Ctsy_Form_item"
+        >
+          <el-input
+            type="password"
+            :size="Size"
+            v-model="Register.PWD"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item
+          label="确认密码"
+          prop="RPWD"
+          class="Ctsy_Form_item"
+        >
+          <el-input
+            type="password"
+            :size="Size"
+            v-model="Register.RPWD"
+          ></el-input>
+        </el-form-item>
+
+        <el-button
+          type="primary"
+          size="medium"
+          @click="SubmitRegister('Register')"
+        >注册</el-button>
       </el-form>
+
     </slot>
 
   </div>
@@ -257,7 +223,7 @@ export default class UserRister extends Vue {
    *
    * 提交注册
    */
-  async SubmitRegister(FormName: string) {
+  SubmitRegister(FormName: string) {
     let refs: any = this.$refs[FormName];
     refs.validate(async (valid: any) => {
       if (!valid) {
@@ -287,7 +253,7 @@ export default class UserRister extends Vue {
     });
   }
 
-  URL: string = require("@/assets/add.png");
+  URL: string = require("../../svg/head.svg");
   File?: File;
 
   async chooseImg() {
@@ -308,4 +274,11 @@ export default class UserRister extends Vue {
 </script>
 
 <style lang="less" scoped>
+.Ctsy_uploader_avatar_container {
+  text-align: center;
+  .avatar-uploader {
+    cursor: pointer;
+    width: 60px;
+  }
+}
 </style>

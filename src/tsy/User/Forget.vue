@@ -4,78 +4,67 @@
       <el-form
         :model="FormData"
         ref="FormData"
-        label-width="120px"
-        size="small"
+        label-width="80px"
+        hide-required-asterisk
+        label-position="left"
         :rules="Rules"
       >
-        <el-row>
-          <el-col :span="12">
-            <el-form-item
-              label="账号"
-              prop="Account"
-            >
-              <el-input
-                :size="Size"
-                v-model="FormData.Account"
-              ></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-
+        <el-form-item
+          label="账号"
+          prop="Account"
+          class="Ctsy_Form_item"
+        >
+          <el-input
+            :size="Size"
+            v-model="FormData.Account"
+          ></el-input>
+        </el-form-item>
         <slot name="email">
         </slot>
+        <el-form-item
+          label="手机号码"
+          class="Ctsy_Form_item"
+          prop="Phone"
+        >
+          <el-input
+            :size="Size"
+            v-model="FormData.Phone"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="验证码"
+          prop="MessageCode"
+          class="Ctsy_Form_item 
+          "
+        >
+          <span class="Ctsy_Form_item_button">
+            <el-input
+              :size="Size"
+              v-model="FormData.MessageCode"
+            ></el-input>
+            <CButton
+              :Time="5"
+              ButtonText="发送验证码"
+            ></CButton>
+          </span>
 
-        <el-row>
-          <el-col :span="8">
-            <el-form-item
-              label="手机号码"
-              prop="Phone"
-            >
-              <el-input
-                :size="Size"
-                v-model="FormData.Phone"
-              ></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item
-              label="验证码"
-              prop="MessageCode"
-            >
-              <el-input
-                :size="Size"
-                v-model="FormData.MessageCode"
-              ></el-input>
+        </el-form-item>
 
-            </el-form-item>
-          </el-col>
-          <el-col :span="4">
-            <CButton :Time="5"></CButton>
-          </el-col>
-        </el-row>
-
-        <el-row>
-          <el-col :span="12">
-            <el-form-item
-              label="新密码"
-              prop="PWD"
-            >
-              <el-input
-                :size="Size"
-                v-model="FormData.PWD"
-              ></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12"></el-col>
-        </el-row>
-        <el-form-item>
-          <el-button
-            type="primary"
-            @click="ForGet('FormData')"
-          >设置</el-button>
-          <el-button @click="Cancel">取消</el-button>
+        <el-form-item
+          label="新密码"
+          class="Ctsy_Form_item"
+          prop="PWD"
+        >
+          <el-input
+            :size="Size"
+            v-model="FormData.PWD"
+          ></el-input>
         </el-form-item>
       </el-form>
+      <el-button
+        type="primary"
+        @click="ForGet('FormData')"
+      >设置</el-button>
     </slot>
   </div>
 

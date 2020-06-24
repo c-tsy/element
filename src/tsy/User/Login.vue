@@ -1,14 +1,40 @@
 <template>
-  <!-- <el-dialog :visible.sync="show"> -->
   <!-- 账号/密码/验证码 -->
+  <div>
+    <el-form
+      :model="FormData"
+      ref="FormData"
+      label-width="40px"
+      hide-required-asterisk
+      label-position="left"
+      :rules="Rules"
+    >
+      <el-form-item
+        prop="Account"
+        class="Ctsy_Form_item"
+        label="账号"
+      >
+        <el-input
+          size="small"
+          v-model="FormData.Account"
+          placeholder="请输入账号"
+        ></el-input>
 
-  <el-form
-    :model="FormData"
-    ref="FormData"
-    label-width="80px"
-    :rules="Rules"
-  >
-    <el-row>
+      </el-form-item>
+      <el-form-item
+        label="密码"
+        prop="PWD"
+        class="Ctsy_Form_item"
+      >
+        <el-input
+          :size="Size"
+          type="password"
+          placeholder="请输入密码"
+          v-model="FormData.PWD"
+        ></el-input>
+      </el-form-item>
+
+      <!-- <el-row>
       <el-col :span="12">
         <el-form-item
           label="账号"
@@ -20,10 +46,9 @@
           ></el-input>
         </el-form-item>
       </el-col>
-      <el-col :span="12"></el-col>
-    </el-row>
+    </el-row> -->
 
-    <!-- <el-row>
+      <!-- <el-row>
         <el-col :span="8">
           <el-form-item
             label="手机号码"
@@ -60,7 +85,7 @@
         </el-col>
       </el-row> -->
 
-    <!-- <el-row>
+      <!-- <el-row>
         <el-col :span="8">
           <el-form-item
             label="邮箱"
@@ -98,7 +123,7 @@
 
       </el-row> -->
 
-    <el-row>
+      <!-- <el-row>
       <el-col :span="8">
         <el-form-item
           label="密码"
@@ -111,22 +136,51 @@
           ></el-input>
         </el-form-item>
       </el-col>
-    </el-row>
+    </el-row> -->
 
-    <el-form-item>
+    </el-form>
+    <div class="Ctsy_Button_Container">
       <el-button
         type="primary"
         @click="Login('FormData')"
-        :size="Size"
+        size="medium"
       >登录</el-button>
-      <el-button
-        :size="Size"
-        @click="Cancel"
-      >取消</el-button>
-    </el-form-item>
-  </el-form>
+      <div class="Ctsy_login_r-f">
+        <span>
+          <router-link
+            class="Ctsy_router_default"
+            to="/lrf/forget"
+          >
+            忘记密码
+          </router-link>
 
-  <!-- </el-dialog> -->
+        </span>
+        <span>
+          <router-link
+            class="Ctsy_router_default"
+            to="/lrf/register"
+          >
+            注册
+          </router-link>
+        </span>
+      </div>
+    </div>
+    <div class="Ctsy_tp_container">
+      <h6>第三方账号登录</h6>
+      <div class="Ctsy_tp_icon_container">
+        <img
+          :src="svg.qq"
+          alt=""
+        >
+        <img
+          :src="svg.wechat"
+          alt=""
+        >
+
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script lang="ts">
@@ -138,6 +192,11 @@ const ERules = ElementFormRules.defalultRules;
 
 @Component({})
 export default class Login extends Vue {
+  svg: { [index: string]: any } = {
+    qq: require("../../svg/qq.svg"),
+    wechat: require("../../svg/wechat.svg")
+  };
+
   FormData: { [index: string]: any } = {
     Account: "",
     // Phone: "",
@@ -188,4 +247,49 @@ export default class Login extends Vue {
 </script>
 
 <style lang="less" scoped>
+.Ctsy_Button_Container {
+  padding: 10px 0;
+  .Ctsy_login_r-f {
+    margin: 10px 0;
+    display: flex;
+    span {
+      flex: 1;
+
+      &:nth-child(1) {
+        text-align: left;
+      }
+      &:nth-child(2) {
+        text-align: right;
+      }
+    }
+    .Ctsy_router_default {
+      outline: none;
+      color: #737373;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+}
+.Ctsy_tp_container {
+  h6 {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: normal;
+    color: #737373;
+    letter-spacing: 1px;
+    text-indent: 1px;
+    text-align: center;
+  }
+  .Ctsy_tp_icon_container {
+    text-align: center;
+    img {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      margin: 5px;
+    }
+  }
+}
 </style>
