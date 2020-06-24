@@ -1,0 +1,67 @@
+@f2: #f2f2f2;
+@gray_border: #ccc;
+@border: 1px solid @f2;
+
+.Model_Container {
+    background: #fff;
+    border-radius: 4px;
+    width: 385px;
+    min-width: 390px;
+    height: auto;
+    min-height: 400px;
+
+    .Model_Header_Container {
+        h3 {
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-indent: 2px;
+            color: #000000;
+            text-align: center;
+            position: relative;
+
+            i {
+                cursor: pointer;
+                position: absolute;
+                left: 10px;
+                top: 3px;
+            }
+        }
+    }
+
+    &>.Model_Body_Container {
+        padding: 0 40px;
+
+        /deep/.Ctsy_icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        /deep/.Ctsy_Form_item {
+            border-bottom: @border;
+
+            input::-webkit-input-placeholder {
+                font-size: 12px;
+            }
+
+            /deep/.Ctsy_Form_item_button {
+                display: flex;
+                flex-direction: row;
+            }
+
+            input {
+                height: 100%;
+                font-size: 16px;
+                width: 100%;
+                border: none;
+                outline: none;
+                padding: 0;
+            }
+        }
+
+        /deep/button {
+            width: 100%;
+            border-radius: 2px;
+            margin-bottom: 10px;
+        }
+    }
+}

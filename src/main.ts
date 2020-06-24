@@ -21,6 +21,8 @@ Vue.use(ElementUI);
 
 Vue.use(Ctsy);
 
+import "../src/common/common.less";
+
 Vue.config.productionTip = false;
 
 Object.keys(filters).forEach((e: any) => {
