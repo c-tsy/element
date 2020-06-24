@@ -1,57 +1,31 @@
 <template>
-  <div>
-    <el-dialog
-      title=""
-      :visible.sync="show"
-      width="60%"
-      :show-close="false"
-      :close-on-click-modal="false"
-      :close-on-press-escape="false"
-    >
-
-      <el-tabs
-        v-model="activeName"
-        @tab-click="handleClick"
-      >
-        <el-tab-pane
-          label="登录"
-          name="login"
-        >
-          <CtsyLogin
-            @cancel="IsVisible"
-            key="login"
-          ></CtsyLogin>
-
-        </el-tab-pane>
-        <el-tab-pane
-          label="注册"
-          name="register"
-        >
-          <CtsyRegister
-            key="forget"
-            @code="getcode"
-            :CodeTimeOut="10"
-          >
-          </CtsyRegister>
-
-        </el-tab-pane>
-        <el-tab-pane
-          label="找回密码"
-          name="forget"
-        >
-          <CtsyForget key="register"> </CtsyForget>
-
-        </el-tab-pane>
-
-      </el-tabs>
-
-    </el-dialog>
+  <div class="Ctsy_Background_Container">
+    <div class="User_Model_Container">
+      <div class="Model_Container">
+        <div class="Model_Header_Container">
+          <h3>
+            <i
+              v-show="$route.meta.index >1"
+              @click="BcakRouter"
+              class="el-icon-arrow-left"
+            ></i>
+            {{$route.meta.title}}
+          </h3>
+        </div>
+        <div class="Model_Body_Container">
+          <router-view />
+          <!-- <transition :name="transitionName">
+          </transition> -->
+        </div>
+      </div>
+    </div>
 
   </div>
+
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 
 @Component
 export default class UserModeule extends Vue {
@@ -73,9 +47,123 @@ export default class UserModeule extends Vue {
     this.$emit("input", v);
   }
 
-  handleClick() {}
+  transitionName: any = "slide-left";
+  @Watch("$route")
+  WRoute(to: any, from: any) {
+    if (to.meta.index > from.meta.index) {
+      this.transitionName = "slide-left";
+    } else {
+      this.transitionName = "slide-right";
+    }
+  }
+  BcakRouter() {
+    this.$router.back();
+  }
 }
 </script>
+<style lang="css">
+body {
+  padding: 0;
+  margin: 0;
+}
+</style>
+<style lang="less" scoped >
+@f2: #f2f2f2;
+@gray_border: #ccc;
+@border: 1px solid @f2;
 
-<style lang="scss" scoped >
+.slide-left-enter,
+.slide-right-leave-active {
+  opacity: 0;
+  -webkit-transform: translate(100%, 0);
+  transform: translate(100%, 0);
+}
+.slide-left-leave-active,
+.slide-right-enter {
+  opacity: 0;
+  -webkit-transform: translate(-100%, 0);
+  transform: translate(-100%, 0);
+}
+
+.Ctsy_Background_Container {
+  transform: translate(0, 0);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+
+  .User_Model_Container {
+    background: url("../../assets/bg1.png");
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // min-width: 1000px;
+    zoom: 1;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > .Model_Container {
+      background: #fff;
+      border-radius: 4px;
+      width: 385px;
+      min-width: 390px;
+      height: auto;
+      min-height: 400px;
+      & > .Model_Header_Container {
+        h3 {
+          font-size: 18px;
+          letter-spacing: 2px;
+          text-indent: 2px;
+          color: #000000;
+          text-align: center;
+          position: relative;
+          i {
+            cursor: pointer;
+            position: absolute;
+            left: 10px;
+            top: 3px;
+          }
+        }
+      }
+
+      & > .Model_Body_Container {
+        padding: 0 40px;
+        /deep/.Ctsy_icon {
+          width: 18px;
+          height: 18px;
+        }
+        /deep/.Ctsy_Form_item {
+          border-bottom: @border;
+          input::-webkit-input-placeholder {
+            font-size: 12px;
+          }
+          /deep/.Ctsy_Form_item_button {
+            display: flex;
+            flex-direction: row;
+          }
+          input {
+            height: 100%;
+            font-size: 16px;
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 0;
+          }
+        }
+
+        /deep/button {
+          width: 100%;
+          border-radius: 2px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
 </style>
