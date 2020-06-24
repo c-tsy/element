@@ -1,6 +1,15 @@
 <template>
   <div>
     <slot>
+      <div class="Model_Header_Container">
+        <h3>
+          <i
+            class="el-icon-arrow-left"
+            @click="$emit('CName','Login')"
+          ></i>
+          忘记密码
+        </h3>
+      </div>
       <el-form
         :model="FormData"
         ref="FormData"
@@ -72,7 +81,7 @@
 
 <script lang="ts">
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
-import ElementFormRules from "@/lib/ElementFormRules/index";
+import ElementFormRules from "../../lib/ElementFormRules/index";
 const ERules = ElementFormRules.defalultRules;
 import CButton from "../Base/TimeOutButton.vue";
 

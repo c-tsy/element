@@ -1,6 +1,15 @@
 <template>
   <div>
 
+    <div class="Model_Header_Container">
+      <h3>
+        <i
+          class="el-icon-arrow-left"
+          @click="$emit('CName','Login')"
+        ></i>
+        注册
+      </h3>
+    </div>
     <slot>
       <el-form
         :model="Register"
@@ -153,11 +162,12 @@
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 
 import Upload from "@ctsy/api-sdk/dist/modules/Upload";
-import CustomValidate from "@/lib/Reg/regFun";
-import ElementFormRules from "@/lib/ElementFormRules/index";
+import CustomValidate from "../../lib/Reg/regFun";
+import ElementFormRules from "../../lib/ElementFormRules/index";
 const ERules = ElementFormRules.defalultRules;
-
 import CButton from "../Base/TimeOutButton.vue";
+
+import User from "@ctsy/vuex/dist/modules/User";
 
 @Component({
   components: {

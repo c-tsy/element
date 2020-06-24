@@ -2,20 +2,18 @@
   <div class="Ctsy_Background_Container">
     <div class="User_Model_Container">
       <div class="Model_Container">
-        <div class="Model_Header_Container">
-          <h3>
-            <i
-              v-show="$route.meta.index >1"
-              @click="BcakRouter"
-              class="el-icon-arrow-left"
-            ></i>
-            {{$route.meta.title}}
-          </h3>
-        </div>
+
         <div class="Model_Body_Container">
-          <router-view />
-          <!-- <transition :name="transitionName">
-          </transition> -->
+
+          <component
+            :is="`Ctsy${compontName}`"
+            @CName="(v)=>{
+              compontName = v
+              }"
+          ></component>
+
+          <!-- <transition :name=" transitionName">
+            </transition> -->
         </div>
       </div>
     </div>
@@ -29,36 +27,7 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 
 @Component
 export default class UserModeule extends Vue {
-  @Prop({ default: false })
-  visible?: boolean;
-
-  activeName: string = "login";
-
-  getcode(v: any) {
-    console.log(v);
-  }
-  IsVisible(v: boolean) {
-    this.visible = v;
-  }
-  get show() {
-    return !!this.visible;
-  }
-  set show(v) {
-    this.$emit("input", v);
-  }
-
-  transitionName: any = "slide-left";
-  @Watch("$route")
-  WRoute(to: any, from: any) {
-    if (to.meta.index > from.meta.index) {
-      this.transitionName = "slide-left";
-    } else {
-      this.transitionName = "slide-right";
-    }
-  }
-  BcakRouter() {
-    this.$router.back();
-  }
+  compontName: string = "Login";
 }
 </script>
 <style lang="css">

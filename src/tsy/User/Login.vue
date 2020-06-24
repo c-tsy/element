@@ -1,6 +1,11 @@
 <template>
   <!-- 账号/密码/验证码 -->
   <div>
+    <div class="Model_Header_Container">
+      <h3>
+        登陆
+      </h3>
+    </div>
     <el-form
       :model="FormData"
       ref="FormData"
@@ -147,21 +152,22 @@
       >登录</el-button>
       <div class="Ctsy_login_r-f">
         <span>
-          <router-link
+
+          <span
             class="Ctsy_router_default"
-            to="/lrf/forget"
+            @click="$emit('CName','Forget')"
           >
             忘记密码
-          </router-link>
+          </span>
 
         </span>
         <span>
-          <router-link
+          <span
             class="Ctsy_router_default"
-            to="/lrf/register"
+            @click="$emit('CName','Register')"
           >
             注册
-          </router-link>
+          </span>
         </span>
       </div>
     </div>
@@ -185,26 +191,17 @@
 
 <script lang="ts">
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
-// import CustomValidate from "@/lib/Reg/regFun";
-import ElementFormRules from "@/lib/ElementFormRules/index";
-
+import ElementFormRules from "../../lib/ElementFormRules/index";
+import User from "@ctsy/api-sdk/dist/modules/User";
 const ERules = ElementFormRules.defalultRules;
-
 @Component({})
 export default class Login extends Vue {
   svg: { [index: string]: any } = {
     qq: require("../../svg/qq.svg"),
     wechat: require("../../svg/wechat.svg")
   };
+  FormData: User.Login = new User.Login();
 
-  FormData: { [index: string]: any } = {
-    Account: "",
-    // Phone: "",
-    // PhoneCode: "",
-    // Email: "",
-    // EmailCode: "",
-    PWD: ""
-  };
   @Prop({ default: "small" })
   Size?: string;
 
