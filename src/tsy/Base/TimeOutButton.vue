@@ -2,9 +2,8 @@
 <template>
   <div>
     <el-button
-      :type="type||'success'"
-      :size="Size || 'small' "
-      style="margin-left:10px"
+      :type="type"
+      size="mini"
       @click="ClickButton"
       :disabled="disabled||DefaultDisabked"
     >
@@ -24,7 +23,7 @@ import { timeout } from "@ctsy/common";
 export default class Name extends Vue {
   @Prop({ default: "small" })
   Size?: string;
-  @Prop({ default: "success" })
+  @Prop({ default: "primary" })
   type?: string;
   @Prop({ default: false })
   disabled?: boolean;
