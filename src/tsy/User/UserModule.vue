@@ -1,23 +1,11 @@
 <template>
-  <div class="Ctsy_Background_Container">
-    <div class="User_Model_Container">
-      <div class="Model_Container">
-
-        <div class="Model_Body_Container">
-
-          <component
-            :is="`Ctsy${compontName}`"
-            @CName="(v)=>{
+  <div>
+    <component
+      :is="`Ctsy${compontName}`"
+      @CName="(v)=>{
               compontName = v
               }"
-          ></component>
-
-          <!-- <transition :name=" transitionName">
-            </transition> -->
-        </div>
-      </div>
-    </div>
-
+    ></component>
   </div>
 
 </template>
@@ -41,22 +29,9 @@ body {
 @gray_border: #ccc;
 @border: 1px solid @f2;
 
-.slide-left-enter,
-.slide-right-leave-active {
-  opacity: 0;
-  -webkit-transform: translate(100%, 0);
-  transform: translate(100%, 0);
-}
-.slide-left-leave-active,
-.slide-right-enter {
-  opacity: 0;
-  -webkit-transform: translate(-100%, 0);
-  transform: translate(-100%, 0);
-}
-
 .Ctsy_Background_Container {
-  transform: translate(0, 0);
-  position: absolute;
+  // transform: translate(0, 0);
+  // position: absolute;
   width: 100%;
   height: 100%;
   z-index: -10;
@@ -82,7 +57,6 @@ body {
       border-radius: 4px;
       width: 385px;
       min-width: 390px;
-      height: auto;
       min-height: 400px;
       & > .Model_Header_Container {
         h3 {
@@ -103,6 +77,7 @@ body {
 
       & > .Model_Body_Container {
         padding: 0 40px;
+        transition: all 0.3 ease;
         /deep/.Ctsy_icon {
           width: 18px;
           height: 18px;
