@@ -1,93 +1,86 @@
 <template>
   <!-- 账号/密码/验证码 -->
-  <div class="Ctsy_Background_Container">
-    <div class="User_Model_Container">
-      <div class="Model_Container">
-        <div class="Model_Header_Container">
-          <h3>
-            登陆
-          </h3>
+  <div class="Model_Container">
+    <div class="Model_Body_Container">
+      <h3>
+        登陆
+      </h3>
+      <el-form
+        :model="FormData"
+        ref="FormData"
+        label-width="40px"
+        hide-required-asterisk
+        label-position="left"
+        :rules="Rules"
+      >
+        <el-form-item
+          prop="Account"
+          class="Ctsy_Form_item"
+          label="账号"
+        >
+          <el-input
+            size="small"
+            v-model="FormData.Account"
+            placeholder="请输入账号"
+          ></el-input>
+
+        </el-form-item>
+        <el-form-item
+          label="密码"
+          prop="PWD"
+          class="Ctsy_Form_item"
+        >
+          <el-input
+            :size="Size"
+            type="password"
+            placeholder="请输入密码"
+            v-model="FormData.PWD"
+          ></el-input>
+        </el-form-item>
+
+      </el-form>
+      <div class="Ctsy_Button_Container">
+        <el-button
+          type="primary"
+          @click="Login('FormData')"
+          size="medium"
+        >登录</el-button>
+        <div class="Ctsy_login_r-f">
+          <span>
+
+            <span
+              class="Ctsy_router_default"
+              @click="$emit('CName','Forget')"
+            >
+              忘记密码
+            </span>
+
+          </span>
+          <span>
+            <span
+              class="Ctsy_router_default"
+              @click="$emit('CName','Register')"
+            >
+              注册
+            </span>
+          </span>
         </div>
-        <div class="Model_Body_Container">
-          <el-form
-            :model="FormData"
-            ref="FormData"
-            label-width="40px"
-            hide-required-asterisk
-            label-position="left"
-            :rules="Rules"
+      </div>
+      <div class="Ctsy_tp_container">
+        <h6>第三方账号登录</h6>
+        <div class="Ctsy_tp_icon_container">
+          <img
+            :src="svg.qq"
+            alt=""
           >
-            <el-form-item
-              prop="Account"
-              class="Ctsy_Form_item"
-              label="账号"
-            >
-              <el-input
-                size="small"
-                v-model="FormData.Account"
-                placeholder="请输入账号"
-              ></el-input>
+          <img
+            :src="svg.wechat"
+            alt=""
+          >
 
-            </el-form-item>
-            <el-form-item
-              label="密码"
-              prop="PWD"
-              class="Ctsy_Form_item"
-            >
-              <el-input
-                :size="Size"
-                type="password"
-                placeholder="请输入密码"
-                v-model="FormData.PWD"
-              ></el-input>
-            </el-form-item>
-
-          </el-form>
-          <div class="Ctsy_Button_Container">
-            <el-button
-              type="primary"
-              @click="Login('FormData')"
-              size="medium"
-            >登录</el-button>
-            <div class="Ctsy_login_r-f">
-              <span>
-
-                <span
-                  class="Ctsy_router_default"
-                  @click="$emit('CName','Forget')"
-                >
-                  忘记密码
-                </span>
-
-              </span>
-              <span>
-                <span
-                  class="Ctsy_router_default"
-                  @click="$emit('CName','Register')"
-                >
-                  注册
-                </span>
-              </span>
-            </div>
-          </div>
-          <div class="Ctsy_tp_container">
-            <h6>第三方账号登录</h6>
-            <div class="Ctsy_tp_icon_container">
-              <img
-                :src="svg.qq"
-                alt=""
-              >
-              <img
-                :src="svg.wechat"
-                alt=""
-              >
-
-            </div>
-          </div>
         </div>
       </div>
     </div>
-
   </div>
 
 </template>
@@ -124,7 +117,7 @@ export default class Login extends Vue {
         this.$emit("success", rs);
       } catch (e) {
         this.$message.error(e.message);
-        this.$emit("error", "error");
+        this.$emit("error", e.message);
       }
     });
   }
