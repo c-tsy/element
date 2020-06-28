@@ -6,7 +6,7 @@ import User from "@ctsy/api-sdk/dist/modules/User";
  * 对性别进行过滤
  * @param v
  */
-export const rSex = (v: number) => {
+export const rSex = (v: any) => {
   return User.Sex[v];
 };
 
