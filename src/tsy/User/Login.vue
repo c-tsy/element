@@ -1,190 +1,93 @@
 <template>
   <!-- 账号/密码/验证码 -->
-  <div>
-    <div class="Model_Header_Container">
-      <h3>
-        登陆
-      </h3>
-    </div>
-    <el-form
-      :model="FormData"
-      ref="FormData"
-      label-width="40px"
-      hide-required-asterisk
-      label-position="left"
-      :rules="Rules"
-    >
-      <el-form-item
-        prop="Account"
-        class="Ctsy_Form_item"
-        label="账号"
-      >
-        <el-input
-          size="small"
-          v-model="FormData.Account"
-          placeholder="请输入账号"
-        ></el-input>
-
-      </el-form-item>
-      <el-form-item
-        label="密码"
-        prop="PWD"
-        class="Ctsy_Form_item"
-      >
-        <el-input
-          :size="Size"
-          type="password"
-          placeholder="请输入密码"
-          v-model="FormData.PWD"
-        ></el-input>
-      </el-form-item>
-
-      <!-- <el-row>
-      <el-col :span="12">
-        <el-form-item
-          label="账号"
-          prop="Account"
-        >
-          <el-input
-            :size="Size"
-            v-model="FormData.Account"
-          ></el-input>
-        </el-form-item>
-      </el-col>
-    </el-row> -->
-
-      <!-- <el-row>
-        <el-col :span="8">
-          <el-form-item
-            label="手机号码"
-            prop="Phone"
+  <div class="Ctsy_Background_Container">
+    <div class="User_Model_Container">
+      <div class="Model_Container">
+        <div class="Model_Header_Container">
+          <h3>
+            登陆
+          </h3>
+        </div>
+        <div class="Model_Body_Container">
+          <el-form
+            :model="FormData"
+            ref="FormData"
+            label-width="40px"
+            hide-required-asterisk
+            label-position="left"
+            :rules="Rules"
           >
-            <el-input
-              :size="Size"
-              v-model="FormData.Phone"
-            ></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item
-            label="验证码"
-            prop="PhoneCode"
-          >
-            <el-input
-              :size="Size"
-              v-model="FormData.PhoneCode"
-            ></el-input>
+            <el-form-item
+              prop="Account"
+              class="Ctsy_Form_item"
+              label="账号"
+            >
+              <el-input
+                size="small"
+                v-model="FormData.Account"
+                placeholder="请输入账号"
+              ></el-input>
 
-          </el-form-item>
-        </el-col>
-        <el-col :span="4">
-          <el-button
-            type="success"
-            :size="Size"
-            key="Phone"
-            style="margin-left:10px"
-            @click="GetCode('Phone')"
-          >
-            获取验证码
-          </el-button>
-        </el-col>
-      </el-row> -->
+            </el-form-item>
+            <el-form-item
+              label="密码"
+              prop="PWD"
+              class="Ctsy_Form_item"
+            >
+              <el-input
+                :size="Size"
+                type="password"
+                placeholder="请输入密码"
+                v-model="FormData.PWD"
+              ></el-input>
+            </el-form-item>
 
-      <!-- <el-row>
-        <el-col :span="8">
-          <el-form-item
-            label="邮箱"
-            prop="Email"
-          >
-            <el-input
-              v-model="FormData.Email"
-              :size="Size"
-            ></el-input>
+          </el-form>
+          <div class="Ctsy_Button_Container">
+            <el-button
+              type="primary"
+              @click="Login('FormData')"
+              size="medium"
+            >登录</el-button>
+            <div class="Ctsy_login_r-f">
+              <span>
 
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item
-            label="验证码"
-            prop="EmailCode"
-          >
-            <el-input
-              v-model="FormData.EmailCode"
-              :size="Size"
-            ></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="4">
-          <el-button
-            type="success"
-            size="small"
-            key="Email"
-            style="margin-left:10px"
-            @click="GetCode('Email')"
-          >
-            获取验证码
-          </el-button>
-        </el-col>
+                <span
+                  class="Ctsy_router_default"
+                  @click="$emit('CName','Forget')"
+                >
+                  忘记密码
+                </span>
 
-      </el-row> -->
+              </span>
+              <span>
+                <span
+                  class="Ctsy_router_default"
+                  @click="$emit('CName','Register')"
+                >
+                  注册
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="Ctsy_tp_container">
+            <h6>第三方账号登录</h6>
+            <div class="Ctsy_tp_icon_container">
+              <img
+                :src="svg.qq"
+                alt=""
+              >
+              <img
+                :src="svg.wechat"
+                alt=""
+              >
 
-      <!-- <el-row>
-      <el-col :span="8">
-        <el-form-item
-          label="密码"
-          prop="PWD"
-        >
-          <el-input
-            :size="Size"
-            type="password"
-            v-model="FormData.PWD"
-          ></el-input>
-        </el-form-item>
-      </el-col>
-    </el-row> -->
-
-    </el-form>
-    <div class="Ctsy_Button_Container">
-      <el-button
-        type="primary"
-        @click="Login('FormData')"
-        size="medium"
-      >登录</el-button>
-      <div class="Ctsy_login_r-f">
-        <span>
-
-          <span
-            class="Ctsy_router_default"
-            @click="$emit('CName','Forget')"
-          >
-            忘记密码
-          </span>
-
-        </span>
-        <span>
-          <span
-            class="Ctsy_router_default"
-            @click="$emit('CName','Register')"
-          >
-            注册
-          </span>
-        </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="Ctsy_tp_container">
-      <h6>第三方账号登录</h6>
-      <div class="Ctsy_tp_icon_container">
-        <img
-          :src="svg.qq"
-          alt=""
-        >
-        <img
-          :src="svg.wechat"
-          alt=""
-        >
 
-      </div>
-    </div>
   </div>
 
 </template>
