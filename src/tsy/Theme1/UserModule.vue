@@ -39,7 +39,10 @@
                 </span>
               </strong>
             </div>
-            <component :is="`Ctsy${showComponent}_theme1`"></component>
+            <component
+              v-bind="props"
+              :is="`Ctsy${showComponent}_theme1`"
+            ></component>
           </div>
         </div>
 
@@ -53,6 +56,32 @@ import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 @Component
 export default class Name extends Vue {
   showComponent: string = "Login";
+  @Prop({
+    default: () => {}
+  })
+  Login?: { [i: string]: any };
+  @Prop({
+    default: () => {}
+  })
+  Register?: { [i: string]: any };
+  @Prop({
+    default: () => {}
+  })
+  Forget?: { [i: string]: any };
+  get props() {
+    switch (this.showComponent) {
+      case "Login":
+        return this.Login;
+        break;
+      case "Register":
+        return this.Register;
+      case "Forget":
+        return this.Forget;
+      default:
+        break;
+    }
+  }
+
   @Prop({
     default:
       "   background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);"
