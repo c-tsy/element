@@ -4,12 +4,15 @@
       class="User_Model_Container"
       :style="`background-image:url(${url})`"
     >
-      <component
-        :is="`Ctsy${compontName}_theme2`"
-        @CName="(v)=>{
+      <keep-alive>
+        <component
+          :is="`Ctsy${compontName}_theme2`"
+          @CName="(v)=>{
               compontName = v
               }"
-      ></component>
+        ></component>
+      </keep-alive>
+
     </div>
   </div>
 
