@@ -1,27 +1,15 @@
 <template>
 
-  <div class="Model_Container">
-    <div class="Model_Body_Container">
-      <h3>
-        <i
-          class="el-icon-arrow-left"
-          @click="$emit('CName','Login')"
-        ></i>
-        忘记密码
-      </h3>
+  <div>
+    <div class="Ctsy_theme2_block_right_box-body">
       <el-form
         :model="FormData"
         ref="FormData"
-        label-width="80px"
         hide-required-asterisk
         label-position="left"
         :rules="Rules"
       >
-        <el-form-item
-          label="账号"
-          prop="Account"
-          class="Ctsy_Form_item"
-        >
+        <el-form-item prop="Account">
           <el-input
             :size="Size"
             v-model="FormData.Account"
@@ -30,23 +18,15 @@
         </el-form-item>
         <slot name="email">
         </slot>
-        <el-form-item
-          label="手机号码"
-          class="Ctsy_Form_item"
-          prop="Phone"
-        >
+        <el-form-item prop="Phone">
           <el-input
             :size="Size"
             v-model="FormData.Phone"
             placeholder="请输入手机号码"
           ></el-input>
         </el-form-item>
-        <el-form-item
-          label="验证码"
-          prop="MessageCode"
-          class="Ctsy_Form_item "
-        >
-          <span class="Ctsy_Form_item_button">
+        <el-form-item prop="MessageCode">
+          <span class="Ctsy_theme2_item_button">
             <el-input
               :size="Size"
               v-model="FormData.MessageCode"
@@ -55,12 +35,11 @@
             <CButton
               :Time="5"
               ButtonText="发送验证码"
+              class="Ctsy_theme2_CButton"
             ></CButton>
           </span>
-
         </el-form-item>
         <el-form-item
-          label="新密码"
           class="Ctsy_Form_item"
           prop="PWD"
         >
@@ -71,10 +50,12 @@
           ></el-input>
         </el-form-item>
       </el-form>
-      <el-button
-        type="primary"
+    </div>
+    <div class="Ctsy_theme2_block_right_box-bottom">
+      <button
+        class="Ctsy_theme2_button"
         @click="Setting('FormData')"
-      >设置</el-button>
+      >设置</button>
     </div>
   </div>
 
@@ -93,10 +74,10 @@ import CButton from "../Base/TimeOutButton.vue";
 })
 export default class Forget extends Vue {
   FormData: { [index: string]: any } = {
-    Account: "da154654",
-    PWD: "d1a34616",
-    Phone: "18148407476",
-    MessageCode: "1234"
+    Account: "",
+    PWD: "",
+    Phone: "",
+    MessageCode: ""
   };
 
   Rules: object = {

@@ -1,95 +1,227 @@
-@f2: #f2f2f2;
-@gray_border: #ccc;
-@border: 1px solid @f2;
+@theme2_color: #3f39ffd6;
 
-.Ctsy_Background_Container {
-    // transform: translate(0, 0);
-    // position: absolute;
+.Ctsy_theme2_Container {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    z-index: -10;
+    zoom: 1;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    .User_Model_Container {
-        // background: url("../assets/bg1.png");
-        position: fixed;
-        top: 0;
-        left: 0;
+    &>.Ctsy_theme2_block_container {
         width: 100%;
         height: 100%;
-        // min-width: 1000px;
-        zoom: 1;
-        background-color: #fff;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center 0;
+        background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+
         display: flex;
         align-items: center;
         justify-content: center;
 
-        &>.Model_Container {
-            background: #fff;
-            border-radius: 4px;
-            width: 385px;
-            min-width: 390px;
-            min-height: 400px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, .12),
-                0 0 6px rgba(0, 0, 0, .04);
+        >.Ctsy_them2_block {
+            width: 900px;
+            height: 650px;
+            display: flex;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 
+            >.Ctsy_theme2_block_left_box {
+                width: 40%;
+                // background: @theme2_color;
+                background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+                height: 100%;
+                // opacity: 0.5;
 
+                >.Ctsy_them2_block_left_box-top {
+                    margin-top: 90px;
 
-            &>.Model_Body_Container {
-                h3 {
-                    font-size: 18px;
-                    letter-spacing: 2px;
-                    text-indent: 2px;
-                    color: #000000;
-                    text-align: center;
-                    position: relative;
+                    >.Ctsy_them2_block_left_box-top_logo {
+                        text-align: center;
 
-                    i {
-                        cursor: pointer;
-                        position: absolute;
-                        left: -14px;
-                        top: 3px;
+                        img {
+                            width: 150px;
+                            object-fit: contain;
+                        }
+
+                        h3 {
+                            font-size: 24px;
+                            color: #fff;
+                            letter-spacing: 1px;
+                            text-indent: 1px;
+                            font-weight: 500;
+
+                        }
+
                     }
                 }
 
-                padding: 0 40px;
-                transition: all 0.3 ease;
+                >.Ctsy_them2_block_left_box-bottom {
+                    margin-top: 90px;
 
-                /deep/.Ctsy_icon {
-                    width: 18px;
-                    height: 18px;
-                }
-
-                /deep/.Ctsy_Form_item {
-                    border-bottom: @border;
-
-                    input::-webkit-input-placeholder {
+                    small {
+                        text-indent: 24px;
+                        display: inline-block;
+                        line-height: 2;
+                        padding: 10px;
+                        color: #fff;
                         font-size: 12px;
-                    }
+                        word-spacing: 2px;
 
-                    /deep/.Ctsy_Form_item_button {
-                        display: flex;
-                        flex-direction: row;
                     }
-
-                    input {
-                        height: 100%;
-                        font-size: 16px;
-                        width: 100%;
-                        border: none;
-                        outline: none;
-                        padding: 0;
-                    }
-                }
-
-                /deep/button {
-                    width: 100%;
-                    border-radius: 2px;
-                    margin-bottom: 10px;
                 }
             }
+
+            >.Ctsy_theme2_block_right_box {
+                width: 60%;
+                height: 100%;
+                background-color: #fff;
+                padding: 0 30px;
+                overflow: auto;
+
+                &::-webkit-scrollbar {
+                    /*滚动条整体样式*/
+                    width: 2.5px;
+                    /*高宽分别对应横竖滚动条的尺寸*/
+                    height: 1px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    /*滚动条里面小方块*/
+                    border-radius: 0;
+                    background-color: @theme2_color;
+
+                }
+
+                &::-webkit-scrollbar-track {
+                    /*滚动条里面轨道*/
+                    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+                    background: #F5F5F5;
+                    border-radius: 0;
+                }
+
+                >.Ctsy_theme2_block_right_box-top {
+                    margin: 40px 0;
+
+                    strong {
+                        font-size: 24px;
+                        color: #d5d5d5;
+                        height: 40px;
+                        line-height: 40px;
+                        // white-space: normal;
+
+                        // letter-spacing: 3px;
+                        span {
+                            cursor: pointer;
+                            transition: all .3s;
+                            display: inline-block;
+                            margin-right: 20px;
+
+                            &:hover {
+                                color: #303030;
+                                // color: rgba(79, 182, 230, 0.657);
+
+                            }
+                        }
+
+                        .active {
+                            color: @theme2_color;
+                            transform: scale(1.2);
+                            pointer-events: none;
+
+                        }
+                    }
+
+
+                }
+
+                .Ctsy_theme2_block_right_box-body {
+                    .Ctsy_theme2_item_button {
+                        position: relative;
+
+                        .Ctsy_theme2_CButton {
+                            position: absolute;
+                            right: 0;
+                            top: -12px;
+
+                            /deep/.el-button {
+                                border: none;
+                                border-radius: 0;
+                                background-color: @theme2_color;
+                            }
+                        }
+                    }
+
+                    /deep/.el-form-item {
+                        margin: 40px 0;
+
+                        /deep/ .el-input__inner {
+                            height: 40px;
+                            border: none;
+                            border-radius: 0;
+                            border-bottom: 1px solid #ccc;
+
+                            &:focus {
+                                border-bottom: 1px solid @theme2_color;
+                                // box-shadow: 0px 7px 5px 0px #b2b2b26b;
+
+                            }
+                        }
+                    }
+                }
+
+                .Ctsy_theme2_block_right_box-bottom {
+                    margin-bottom: 10px;
+
+                    .Ctsy_theme2_button {
+                        width: 100%;
+                        border-radius: none;
+                        border: none;
+                        background-image: linear-gradient(to right, #3a8ee6 0%, #495aff 100%);
+                        color: #fff;
+                        font-size: 18px;
+                        letter-spacing: 2px;
+                        height: 40px;
+                        outline: none;
+                        cursor: pointer;
+                    }
+
+                    .Ctsy_theme2_tp {
+                        margin-top: 90px;
+
+                        h6 {
+                            margin: 0;
+                            padding: 10px 0;
+                            font-size: 14px;
+                            font-weight: normal;
+                            color: #737373;
+                            letter-spacing: 1px;
+                            text-indent: 1px;
+                            text-align: center;
+                        }
+
+                        .Ctsy_theme2_tp_icon_container {
+                            text-align: center;
+
+                            img {
+                                width: 30px;
+                                height: 30px;
+                                cursor: pointer;
+                                margin: 10px;
+                            }
+                        }
+                    }
+
+                }
+
+
+            }
+
         }
     }
+
 }

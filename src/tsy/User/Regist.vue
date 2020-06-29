@@ -1,19 +1,10 @@
 <template>
-
-  <div class="Model_Container">
-    <div class="Model_Body_Container">
-      <h3>
-        <i
-          class="el-icon-arrow-left"
-          @click="$emit('CName','Login')"
-        ></i>
-        注册
-      </h3>
+  <div>
+    <div class="Ctsy_theme2_block_right_box-body">
       <slot>
         <el-form
           :model="Register"
           ref="Register"
-          label-width="auto"
           hide-required-asterisk
           label-position="left"
           :rules="Rules"
@@ -34,7 +25,6 @@
         </slot> -->
 
           <el-form-item
-            label="姓名"
             prop="Name"
             class="Ctsy_Form_item"
           >
@@ -46,7 +36,6 @@
           </el-form-item>
 
           <el-form-item
-            label="昵称"
             prop="NickName"
             class="Ctsy_Form_item"
           >
@@ -58,7 +47,6 @@
           </el-form-item>
 
           <el-form-item
-            label="账号"
             prop="Account"
             class="Ctsy_Form_item"
           >
@@ -70,7 +58,6 @@
           </el-form-item>
 
           <el-form-item
-            label="手机号码"
             prop="Phone"
             class="Ctsy_Form_item"
           >
@@ -82,23 +69,21 @@
           </el-form-item>
 
           <el-form-item
-            label="短信验证码"
             prop="MessageCode"
             class="Ctsy_Form_item"
           >
-            <span class="Ctsy_Form_item_button">
+            <span class="Ctsy_theme2_item_button">
               <el-input
                 :size="Size"
                 v-model="Register.PhoneCode"
                 placeholder="请输入短信验证码"
               ></el-input>
-              <CButton :Time="0"></CButton>
+              <CButton class="Ctsy_theme2_CButton"></CButton>
             </span>
 
           </el-form-item>
 
           <el-form-item
-            label="邮箱"
             prop="Email"
             class="Ctsy_Form_item"
           >
@@ -111,23 +96,21 @@
           </el-form-item>
 
           <el-form-item
-            label="邮箱验证码"
             prop="EmailCode"
             class="Ctsy_Form_item"
           >
-            <span class="Ctsy_Form_item_button">
+            <span class="Ctsy_theme2_item_button">
               <el-input
                 :size="Size"
                 v-model="Register.EmailCode"
                 placeholder="请输入邮箱验证码"
               ></el-input>
-              <CButton :Time="20"></CButton>
+              <CButton class="Ctsy_theme2_CButton"></CButton>
             </span>
 
           </el-form-item>
 
           <el-form-item
-            label="密码"
             prop="PWD"
             class="Ctsy_Form_item"
           >
@@ -140,7 +123,6 @@
           </el-form-item>
 
           <el-form-item
-            label="确认密码"
             prop="RPWD"
             class="Ctsy_Form_item"
           >
@@ -151,16 +133,16 @@
               placeholder="请输入确认密码"
             ></el-input>
           </el-form-item>
-
-          <el-button
-            type="primary"
-            size="medium"
-            @click="SubmitRegister('Register')"
-          >注册</el-button>
         </el-form>
 
       </slot>
 
+    </div>
+    <div class="Ctsy_theme2_block_right_box-bottom">
+      <button
+        class="Ctsy_theme2_button"
+        @click="SubmitRegister('Register')"
+      >注册</button>
     </div>
   </div>
 
