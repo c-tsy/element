@@ -5,7 +5,7 @@
       :style="`background-image:url(${url})`"
     >
       <component
-        :is="`Ctsy${compontName}`"
+        :is="`Ctsy${compontName}_theme2`"
         @CName="(v)=>{
               compontName = v
               }"

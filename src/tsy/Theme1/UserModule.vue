@@ -39,7 +39,7 @@
                 </span>
               </strong>
             </div>
-            <component :is="`Ctsy${showComponent}`"></component>
+            <component :is="`Ctsy${showComponent}_theme1`"></component>
           </div>
         </div>
 
