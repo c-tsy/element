@@ -1,21 +1,12 @@
 <template>
-
-  <div class="Model_Container">
-    <div class="Model_Body_Container">
-      <h3>
-        <i
-          class="el-icon-arrow-left"
-          @click="$emit('CName','Login')"
-        ></i>
-        注册
-      </h3>
+  <div>
+    <div class="Ctsy_theme2_block_right_box-body">
       <slot>
         <el-form
-          :model="Register"
-          ref="Register"
-          label-width="auto"
+          :model="FormData"
+          ref="FormData"
           hide-required-asterisk
-          label-position="left"
+          size="small"
           :rules="Rules"
         >
           <div class="Ctsy_uploader_avatar_container">
@@ -26,141 +17,116 @@
               alt="头像上传"
             >
           </div>
-
-          <!-- <slot name='avatar'>
-          <el-form-item label="头像">
-           
-          </el-form-item>
-        </slot> -->
-
           <el-form-item
-            label="姓名"
             prop="Name"
             class="Ctsy_Form_item"
           >
             <el-input
-              :size="Size"
-              v-model="Register.Name"
+              v-model="FormData.Name"
               placeholder="请输入姓名"
             ></el-input>
           </el-form-item>
 
           <el-form-item
-            label="昵称"
             prop="NickName"
             class="Ctsy_Form_item"
           >
             <el-input
-              :size="Size"
-              v-model="Register.NickName"
+              v-model="FormData.NickName"
               placeholder="请输入昵称"
             ></el-input>
           </el-form-item>
 
           <el-form-item
-            label="账号"
             prop="Account"
             class="Ctsy_Form_item"
           >
             <el-input
-              :size="Size"
-              v-model="Register.Account"
+              v-model="FormData.Account"
               placeholder="请输入账号"
             ></el-input>
           </el-form-item>
 
           <el-form-item
-            label="手机号码"
             prop="Phone"
             class="Ctsy_Form_item"
           >
             <el-input
-              :size="Size"
-              v-model="Register.Phone"
+              v-model="FormData.Phone"
               placeholder="请输入手机号码"
             ></el-input>
           </el-form-item>
 
           <el-form-item
-            label="短信验证码"
             prop="MessageCode"
             class="Ctsy_Form_item"
           >
-            <span class="Ctsy_Form_item_button">
+            <span class="Ctsy_theme2_item_button">
               <el-input
-                :size="Size"
-                v-model="Register.PhoneCode"
+                v-model="FormData.PhoneCode"
                 placeholder="请输入短信验证码"
               ></el-input>
-              <CButton :Time="0"></CButton>
+              <CButton class="Ctsy_theme2_CButton"></CButton>
             </span>
 
           </el-form-item>
 
           <el-form-item
-            label="邮箱"
             prop="Email"
             class="Ctsy_Form_item"
           >
             <el-input
-              :size="Size"
-              v-model="Register.Email"
+              v-model="FormData.Email"
               placeholder="请输入邮箱"
             ></el-input>
 
           </el-form-item>
 
           <el-form-item
-            label="邮箱验证码"
             prop="EmailCode"
             class="Ctsy_Form_item"
           >
-            <span class="Ctsy_Form_item_button">
+            <span class="Ctsy_theme2_item_button">
               <el-input
-                :size="Size"
-                v-model="Register.EmailCode"
+                v-model="FormData.EmailCode"
                 placeholder="请输入邮箱验证码"
               ></el-input>
-              <CButton :Time="20"></CButton>
+              <CButton class="Ctsy_theme2_CButton"></CButton>
             </span>
 
           </el-form-item>
 
           <el-form-item
-            label="密码"
             prop="PWD"
             class="Ctsy_Form_item"
           >
             <el-input
               type="password"
-              :size="Size"
-              v-model="Register.PWD"
+              v-model="FormData.PWD"
               placeholder="请输入密码"
             ></el-input>
           </el-form-item>
 
           <el-form-item
-            label="确认密码"
             prop="RPWD"
             class="Ctsy_Form_item"
           >
             <el-input
               type="password"
-              :size="Size"
-              v-model="Register.RPWD"
+              v-model="FormData.RPWD"
               placeholder="请输入确认密码"
             ></el-input>
           </el-form-item>
-
-          <el-button
-            type="primary"
-            size="medium"
-            @click="SubmitRegister('Register')"
-          >注册</el-button>
         </el-form>
 
       </slot>
 
+    </div>
+    <div class="Ctsy_theme2_block_right_box-bottom">
+      <button
+        class="Ctsy_theme2_button"
+        @click="SubmitRegister('FormData')"
+      >注册</button>
     </div>
   </div>
 
@@ -174,7 +140,6 @@ import CustomValidate from "../../lib/Reg/regFun";
 import ElementFormRules from "../../lib/ElementFormRules/index";
 const ERules = ElementFormRules.defalultRules;
 import CButton from "../Base/TimeOutButton.vue";
-
 import User from "@ctsy/vuex/dist/modules/User";
 
 @Component({
@@ -209,7 +174,7 @@ export default class UserRister extends Vue {
 
   imageUrl: string = "";
 
-  Register: { [index: string]: any } = {
+  FormData: { [index: string]: any } = {
     Avatar: "",
     Name: "",
     NickName: "",
@@ -228,7 +193,7 @@ export default class UserRister extends Vue {
   /**
    * 对输入的重复密码进行监听
    */
-  @Watch("Register.PWD")
+  @Watch("FormData.PWD")
   pwd(n: string, o: string) {
     CustomValidate.EnterRPWD.val = n;
   }
@@ -258,12 +223,12 @@ export default class UserRister extends Vue {
             what: "head-img"
           });
 
-          this.Register.Avatar = URL;
+          this.FormData.Avatar = URL;
         } else {
-          this.Register.Avatar = "";
+          this.FormData.Avatar = "";
         }
 
-        let rs = await this.$store.dispatch("get_user_register", this.Register);
+        let rs = await this.$store.dispatch("get_user_register", this.FormData);
         this.$message.success("注册成功");
         this.$emit("success");
       } catch (error) {
