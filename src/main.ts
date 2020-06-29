@@ -17,7 +17,8 @@ Vue.use(ElementUI);
 
 Vue.use(Ctsy);
 
-import "../src/common/common.less";
+import "../src/common/theme2.less";
+import "../src/common/theme1.less";
 
 Vue.config.productionTip = false;
 
