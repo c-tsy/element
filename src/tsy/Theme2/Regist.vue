@@ -66,7 +66,10 @@
                 v-model="FormData.PhoneCode"
                 placeholder="请输入短信验证码"
               ></el-input>
-              <CButton class="Ctsy_theme2_CButton"></CButton>
+              <CButton
+                :Time="Time"
+                class="Ctsy_theme2_CButton"
+              ></CButton>
             </span>
 
           </el-form-item>
@@ -91,7 +94,10 @@
                 v-model="FormData.EmailCode"
                 placeholder="请输入邮箱验证码"
               ></el-input>
-              <CButton class="Ctsy_theme2_CButton"></CButton>
+              <CButton
+                :Time="Time"
+                class="Ctsy_theme2_CButton"
+              ></CButton>
             </span>
 
           </el-form-item>
@@ -148,29 +154,11 @@ import User from "@ctsy/vuex/dist/modules/User";
   }
 })
 export default class UserRister extends Vue {
-  /**
-   * 输入框大小
-   */
-  @Prop({ default: "small" })
-  Size?: string;
-
   @Prop({ default: require("../../assets/bg1.png") })
   url?: string;
 
-  /**
-   *  Avatar
-   *  IsPhone
-   * IsEmail
-   *
-   */
-  @Prop({
-    default: () => ({
-      Avatar: false,
-      IsPhone: true,
-      IsEmail: false
-    })
-  }) //是否需要显示
-  registerProps?: { [index: string]: boolean };
+  @Prop({ default: 30 })
+  Time?: number;
 
   imageUrl: string = "";
 

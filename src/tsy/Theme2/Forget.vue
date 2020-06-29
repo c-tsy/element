@@ -30,7 +30,7 @@
               placeholder="请输入验证码"
             ></el-input>
             <CButton
-              :Time="5"
+              :Time="Time"
               ButtonText="发送验证码"
               class="Ctsy_theme2_CButton"
             ></CButton>
@@ -82,6 +82,9 @@ export default class Forget extends Vue {
     MessageCode: ERules.MessageCode,
     PWD: ERules.PWD
   };
+
+  @Prop({ default: 30 })
+  Time?: number;
 
   /**
    * 找回密码
