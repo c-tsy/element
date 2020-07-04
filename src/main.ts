@@ -7,11 +7,7 @@ import Ctsy from "./index";
 
 import * as filters from "./filters";
 
-import { ApiConfig } from "@ctsy/api-sdk";
-
-import User from "@ctsy/api-sdk/dist/modules/User";
-
-// User.Sex;
+// import { ApiConfig } from "@ctsy/api-sdk";
 
 // ApiConfig.AppID = "dev";
 // ApiConfig.Secret = "dev2930sf9fwopfwe9";
@@ -20,6 +16,9 @@ import User from "@ctsy/api-sdk/dist/modules/User";
 Vue.use(ElementUI);
 
 Vue.use(Ctsy);
+
+import "../src/common/theme2.less";
+import "../src/common/theme1.less";
 
 Vue.config.productionTip = false;
 
