@@ -61,6 +61,9 @@ export default class Login extends Vue {
   };
   FormData: User.Login = new User.Login();
 
+  @Prop({ default: "" })
+  router: string = "";
+
   /**
    * 登录
    */
@@ -74,6 +77,11 @@ export default class Login extends Vue {
       try {
         let rs = await this.$store.dispatch("get_user_login", this.FormData);
         this.$message.success("登录成功");
+        if (this.router != "") {
+          this.$router.push({
+            path: "/" + this.router
+          });
+        }
         this.$emit("success", rs);
       } catch (error) {
         this.$message.error(error.message);
@@ -82,12 +90,6 @@ export default class Login extends Vue {
     });
   }
 
-  /**
-   * 取消
-   */
-  Cancel() {
-    this.$emit("cancel", false);
-  }
   /**
    *
    * 表单验证规则

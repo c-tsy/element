@@ -21,8 +21,7 @@
             </div>
             <div class="Ctsy_them2_block_left_box-bottom">
               <small>
-                百度（纳斯达克：BIDU）是全球最大的中文搜索引擎，中国最大的以信息和知识为核心的互联网综合服务公司，全球领先的人工智能平台型公司。百度愿景是：成为最懂用户，并能帮助人们成长的全球顶级高科技公司。 [1]
-                “百度”二字，来自于八百年前南宋词人辛弃疾的一句词：众里寻他千百度。这句话描述了词人对理想的执着追求。1999年底，身在美国硅谷的李彦宏看到了中国互联网及中文搜索引擎服务的巨大发展潜力，抱着技术改变世界的梦想，他毅然辞掉硅谷的高薪工作，携搜索引擎专利技术，于 2000年1月1日在中关村创建了百度公司。
+                {{Memo}}
               </small>
             </div>
           </div>
@@ -42,6 +41,8 @@
             <component
               v-bind="props"
               :is="`Ctsy${showComponent}_theme1`"
+              @success="success"
+              @error="error "
             ></component>
           </div>
         </div>
@@ -59,7 +60,9 @@ export default class Name extends Vue {
   @Prop({
     default: () => {}
   })
-  Login?: { [i: string]: any };
+  Login?: { [i: string]: any } = {
+    router: "/"
+  };
   @Prop({
     default: () => {}
   })
@@ -81,6 +84,13 @@ export default class Name extends Vue {
       default:
         break;
     }
+  }
+
+  success(v: any) {
+    this.$emit("success", v);
+  }
+  error(v: any) {
+    this.$emit("error", v);
   }
 
   @Prop({
