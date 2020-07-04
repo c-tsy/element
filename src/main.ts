@@ -12,13 +12,13 @@ import * as filters from "./filters";
 // ApiConfig.AppID = "dev";
 // ApiConfig.Secret = "dev2930sf9fwopfwe9";
 // ApiConfig.Key = "dev";
+// import './common/theme2.less'
 
 Vue.use(ElementUI);
 
 Vue.use(Ctsy);
 
-import "../src/common/theme2.less";
-import "../src/common/theme1.less";
+// import "../src/common/theme1.less";
 
 Vue.config.productionTip = false;
 

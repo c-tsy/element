@@ -1,8 +1,7 @@
 <template>
   <div>
-    <CtsyUserModule_theme1></CtsyUserModule_theme1>
+    <CtsyUserModule_theme2></CtsyUserModule_theme2>
     <!-- <CtsyUserModule_theme2></CtsyUserModule_theme2> -->
-
   </div>
 </template>
 
