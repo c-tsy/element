@@ -52,7 +52,15 @@
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 import ElementFormRules from "../../lib/ElementFormRules/index";
 import User from "@ctsy/api-sdk/dist/modules/User";
+import PublicReg from "@ctsy/vuex/dist/RegExp/index";
+
 const ERules = ElementFormRules.defalultRules;
+let reg = new PublicReg.Regs();
+let custom = new PublicReg.CustomReg();
+custom.Account = /[a-zA-z]{4,10}/g;
+
+console.log(reg);
+
 @Component
 export default class Login extends Vue {
   svg: { [index: string]: any } = {
@@ -61,8 +69,8 @@ export default class Login extends Vue {
   };
   FormData: User.Login = new User.Login();
 
-  @Prop({ default: "" })
-  router: string = "";
+  @Prop()
+  props!: any;
 
   /**
    * 登录
@@ -77,9 +85,9 @@ export default class Login extends Vue {
       try {
         let rs = await this.$store.dispatch("get_user_login", this.FormData);
         this.$message.success("登录成功");
-        if (this.router != "") {
+        if (this.props.Torouter != "") {
           this.$router.push({
-            path: "/" + this.router
+            path: "/" + this.props.Torouter
           });
         }
         this.$emit("success", rs);

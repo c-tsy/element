@@ -39,7 +39,7 @@
               </strong>
             </div>
             <component
-              v-bind="props"
+              :props="props"
               :is="`Ctsy${showComponent}_theme1`"
               @success="success"
               @error="error "
@@ -60,9 +60,8 @@ export default class Name extends Vue {
   @Prop({
     default: () => {}
   })
-  Login?: { [i: string]: any } = {
-    router: "/"
-  };
+  Login?: { [i: string]: any };
+
   @Prop({
     default: () => {}
   })

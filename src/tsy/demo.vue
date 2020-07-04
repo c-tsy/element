@@ -3,6 +3,9 @@
     <CtsyUserModule_theme1
       @success="su"
       @error="er"
+      :Login="{
+        Torouter:'/'
+        }"
     ></CtsyUserModule_theme1>
     <!-- <CtsyUserModule_th eme2></CtsyUserModule_theme2> -->
 
